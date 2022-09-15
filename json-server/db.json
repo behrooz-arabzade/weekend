@@ -1,0 +1,306 @@
+{
+    "roles": [
+      {
+        "id": 1,
+        "title": "admin"
+      },
+      {
+        "id": 2,
+        "title": "user"
+      }
+    ],
+    "tags": [
+      {
+        "id": 1,
+        "title": "بیلیارد"
+      },
+      {
+        "id": 2,
+        "title": "بولینگ"
+      },
+      {
+        "id": 3,
+        "title": "سینما"
+      },
+      {
+        "id": 4,
+        "title": "فوتبال"
+      },
+      {
+        "id": 5,
+        "title": "والیبال"
+      },
+      {
+        "id": 6,
+        "title": "بسکتبال"
+      },
+      {
+        "id": 7,
+        "title": "اتاق فرار"
+      }
+    ],
+    "users": [
+      {
+        "id": 1,
+        "firstName": "Behrooz",
+        "lastName": "Arabzade",
+        "mobile": "09390177883",
+        "isMobileConfirmed": true,
+        "roleId": 1,
+        "username": "behrooz",
+        "password": 123
+      },
+      {
+        "id": 2,
+        "firstName": "Arian",
+        "lastName": "SalemAbadi",
+        "mobile": "09350215515",
+        "isMobileConfirmed": false,
+        "roleId": 2,
+        "username": "arian",
+        "password": 123
+      },
+      {
+        "id": 3,
+        "firstName": "Sanaz",
+        "lastName": "Maghsudi",
+        "mobile": "09367063739",
+        "isMobileConfirmed": true,
+        "roleId": 2,
+        "username": "sanaz",
+        "password": 123
+      }
+    ],
+    "places": [
+      {
+        "id": 1,
+        "name": "ایران مال",
+        "address": "اینجا آدرس قرار میگیرد"
+      },
+      {
+        "id": 2,
+        "name": "سینما آزادی",
+        "address": "اینجا آدرس قرار میگیرد"
+      },
+      {
+        "id": 3,
+        "name": "اتاق فرار حقانی",
+        "address": "اینجا آدرس قار میگیرد"
+      }
+    ],
+    "placeTags": [
+      {
+        "id": 1,
+        "placeId": 1,
+        "tagId":1
+      },
+      {
+        "id": 2,
+        "placeId": 1,
+        "tagId":2
+      },
+      {
+        "id": 1,
+        "placeId": 1,
+        "tagId":3
+      },
+      {
+        "id": 2,
+        "placeId": 2,
+        "tagId":3
+      },
+      {
+        "id": 3,
+        "placeId": 1,
+        "tagId":7
+      }
+    ],
+    "events": [
+      {
+        "id": 1,
+        "name": "بیلیارد ایران مال",
+        "placeId": 1,
+        "limitations": {
+          "minUserNumber": 2,
+          "maxUserNumber": 2,
+          "schedule": {
+            "data": "2022-10-10",
+            "timeStart": "15:00:00",
+            "timeEnd": "18:00:00",
+            "deadline": "2022-10-09T15:00:00.000Z"
+          }
+        },
+        "reservingState": "Not_Reserved",
+        "countingType": "Go_Dutch",
+        "Pics": [
+          "https://www.crushpixel.com/big-static15/preview4/biliard-2136168.jpg",
+          "https://media-cdn.tripadvisor.com/media/photo-s/0e/84/7f/71/stifler-pool-biliard.jpg",
+          "https://media-cdn.tripadvisor.com/media/photo-s/0a/66/4c/b7/biliard.jpg"
+        ],
+        "userId": 1,
+        "state": "Registering",
+        "createdTime": "2020-07-01T15:00:00.000Z"
+      }
+    ],
+    "eventComments": [
+    ],
+    "eventParticipants": [
+      {
+        "id":1,
+        "eventId": 1,
+        "userId": 1
+      }
+    ],
+    "participantComments": [
+      {
+        "id": 1,
+        "text": "یک نظر تستی",
+        "star": 5,
+        "userId": 1,
+        "eventId": 1,
+        "createdTime": "2019-07-02T15:00:00.000Z"
+      },
+      {
+        "id": 2,
+        "text": "یک نظر تستی",
+        "star": 3,
+        "userId": 2,
+        "eventId": 1,
+        "createdTime": "2019-07-02T15:00:00.000Z"
+      }
+    ],
+    "eventTags": [
+      {
+        "id": 1,
+        "eventId": 1,
+        "tagId": 1
+      }
+    ],
+    "post": [
+      {
+        "id": 1,
+        "eventId": null,
+        "Pics": [
+          "https://www.crushpixel.com/big-static15/preview4/biliard-2136168.jpg",
+          "https://media-cdn.tripadvisor.com/media/photo-s/0e/84/7f/71/stifler-pool-biliard.jpg",
+          "https://media-cdn.tripadvisor.com/media/photo-s/0a/66/4c/b7/biliard.jpg"
+        ],
+        "description": "توضیحات در مورد پست و عکس ها",
+        "createdTime": "2020-07-02T15:00:00.000Z"
+      }
+    ],
+    "postTags": [
+      {
+        "id": 1,
+        "postId": 1,
+        "tagId": 2
+      }
+    ],
+    "comments": [
+      {
+        "id": 1,
+        "text": "یک نظر تستی",
+        "userId": 2,
+        "postId": 1,
+        "createdTime": "2019-07-02T15:00:00.000Z"
+      },
+      {
+        "id": 2,
+        "text": "یک نظر تستی",
+        "userId": 1,
+        "postId": 1,
+        "createdTime": "2019-07-02T15:00:00.000Z"
+      },
+      {
+        "id": 3,
+        "text": "یک نظر تستی",
+        "userId": 3,
+        "postId": 1,
+        "createdTime": "2019-07-02T15:00:00.000Z"
+      }
+    ],
+    "reactions": [
+      {
+        "id": 1,
+        "type": "Like",
+        "userId": 1,
+        "postId": 1,
+        "createdTime": "2019-07-02T15:00:00.000Z"
+      },
+      {
+        "id": 2,
+        "type": "Smile",
+        "userId": 2,
+        "postId": 1,
+        "createdTime": "2019-07-02T15:00:00.000Z"
+      },
+      {
+        "id": 3,
+        "type": "cry",
+        "userId": 3,
+        "postId": 1,
+        "createdTime": "2019-07-02T15:00:00.000Z"
+      }
+    ],
+    "friendUsers": [
+      {
+        "id": 1,
+        "userId": 1,
+        "friendId": 2,
+        "type": "Normal",
+        "createdTime": "2019-07-02T15:00:00.000Z"
+      },
+      {
+        "id": 2,
+        "userId": 2,
+        "friendId": 1,
+        "type": "Normal",
+        "createdTime": "2019-07-02T15:00:00.000Z"
+      },
+      {
+        "id": 3,
+        "userId": 1,
+        "friendId": 3,
+        "type": "Close",
+        "createdTime": "2019-07-02T15:00:00.000Z"
+      },
+      {
+        "id": 4,
+        "userId": 3,
+        "friendId": 1,
+        "type": "Close",
+        "createdTime": "2019-07-02T15:00:00.000Z"
+      }
+    ],
+    "blockedUsers": [],
+    "followedUsers": [
+      {
+        "id": 1,
+        "userId": 2,
+        "followedId": 1,
+        "createdTime": "2019-07-02T15:00:00.000Z"
+      }
+    ],
+    "reports": [
+      {
+        "id": 1,
+        "type": "Comment",
+        "reportedId": 1,
+        "userId":3,
+        "issueType": "Wrong",
+        "message": "دلیل ریپورت کردن",
+        "createdTime": "2019-07-02T15:00:00.000Z"
+      }
+    ],
+    "recommendations": [
+      {
+        "id": 1,
+        "userId": 2,
+        "recomenderId": 1,
+        "eventId": 1,
+        "star": 5,
+        "text": "یک نظر تستی",
+        "createdTime": "2019-07-02T15:00:00.000Z"
+      }
+    ]
+  }
