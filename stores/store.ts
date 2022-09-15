@@ -1,23 +1,39 @@
-import { configureStore, ThunkAction, Action } from "@reduxjs/toolkit";
-import { createWrapper } from "next-redux-wrapper";
+import { combineReducers, configureStore } from "@reduxjs/toolkit";
+import {
+  persistStore,
+  persistReducer,
+  FLUSH,
+  REHYDRATE,
+  PAUSE,
+  PERSIST,
+  PURGE,
+  REGISTER,
+} from "redux-persist";
+import storage from "redux-persist/lib/storage";
 import templateSlice from "./slices/templateSlice/templateSlice";
 
-const makeStore = () =>
-  configureStore({
-    // add all slices reducer in this reducer object
-    reducer: {
-      [templateSlice.name]: templateSlice,
-    },
-    devTools: true,
-  });
+const persistConfig = {
+  key: "root",
+  version: 1,
+  storage,
+};
 
-export type AppStore = ReturnType<typeof makeStore>;
-export type AppState = ReturnType<AppStore["getState"]>;
-export type AppThunk<ReturnType = void> = ThunkAction<
-  ReturnType,
-  AppState,
-  unknown,
-  Action
->;
+// add all slices reducer in this reducer object
+const rootReducer = combineReducers({
+  [templateSlice.name]: templateSlice,
+});
 
-export const wrapper = createWrapper<AppStore>(makeStore);
+const persistedReducer = persistReducer(persistConfig, rootReducer);
+
+export const store = configureStore({
+  reducer: persistedReducer,
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({
+      serializableCheck: {
+        ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+      },
+    }),
+  devTools: true,
+});
+
+export const persistor = persistStore(store);
