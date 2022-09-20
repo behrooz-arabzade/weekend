@@ -1,7 +1,6 @@
-import { Button, ButtonBase, Paper, Typography } from "@mui/material";
 import React, { FC, useCallback } from "react";
-import cs from "classnames";
 import useTagCardStyle from "./useStyle";
+import { ButtonBase, Paper, Typography } from "@mui/material";
 
 interface ITagCardProps {
   tagName: string;
@@ -18,7 +17,7 @@ const TagCard: FC<ITagCardProps> = ({
   selected,
   onSelect,
 }) => {
-  const styles = useTagCardStyle();
+  const { classes, cx } = useTagCardStyle();
 
   const handleClick = useCallback(() => {
     onSelect(tagId);
@@ -26,18 +25,18 @@ const TagCard: FC<ITagCardProps> = ({
 
   return (
     <ButtonBase onClick={handleClick}>
-      <Paper className={cs(styles.root)} elevation={3}>
-        <img className={cs(styles.image)} src={tagImageSrc} />
+      <Paper className={cx(classes.root)} elevation={3}>
+        <img className={cx(classes.image)} src={tagImageSrc} />
 
-        <div className={cs(styles.footer, selected && styles.footerSelected)}>
-          <Typography className={cs(styles.name)}>{tagName}</Typography>
+        <div className={cx(classes.footer, selected && classes.footerSelected)}>
+          <Typography className={cx(classes.name)}>{tagName}</Typography>
 
           {selected && (
-            <img className={cs(styles.addIcon)} src="/icons/close.png" />
+            <img className={cx(classes.addIcon)} src="/icons/close.png" />
           )}
 
           {!selected && (
-            <img className={cs(styles.addIcon)} src="/icons/plus.png" />
+            <img className={cx(classes.addIcon)} src="/icons/plus.png" />
           )}
         </div>
       </Paper>

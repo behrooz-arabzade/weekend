@@ -1,10 +1,10 @@
-import '../styles/globals.css'
-import type { AppProps } from 'next/app'
-import { Provider } from 'react-redux'
-import { persistor, store } from 'stores/store'
-import { PersistGate } from "redux-persist/integration/react"
-import { ThemeProvider } from '@mui/material/styles';
-import theme from 'mui/theme'
+import "../styles/globals.css";
+import type { AppProps } from "next/app";
+import { Provider } from "react-redux";
+import { persistor, store } from "stores/store";
+import { PersistGate } from "redux-persist/integration/react";
+import { ThemeProvider } from "@mui/material/styles";
+import theme from "mui/theme";
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
@@ -15,7 +15,7 @@ function MyApp({ Component, pageProps }: AppProps) {
         </ThemeProvider>
       </PersistGate>
     </Provider>
-  )
+  );
 }
 
 export default MyApp;

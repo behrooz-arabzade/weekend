@@ -12,6 +12,7 @@ const Home: NextPage = () => {
         tagId={1}
         tagImageSrc="https://i1.sndcdn.com/artworks-Ln0wbWGPUpAfml94-LDaVMA-t500x500.jpg"
         tagName="booling"
+        selected
       />
       <Head>
         <title>Create Next App</title>
