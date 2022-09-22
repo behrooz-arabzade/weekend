@@ -25,7 +25,7 @@ const TagCard: FC<ITagCardProps> = ({
 
   return (
     <ButtonBase onClick={handleClick}>
-      <Paper className={cx(classes.root)} elevation={3}>
+      <Paper className={cx(classes.root)} elevation={8}>
         <img className={cx(classes.image)} src={tagImageSrc} />
 
         <div className={cx(classes.footer, selected && classes.footerSelected)}>
