@@ -15,7 +15,7 @@ const useTagCardStyle = makeStyles()((theme) => ({
   },
   image: {
     [theme.breakpoints.down("sm")]: {
-      width: 200,
+      width:200,
     },
     [theme.breakpoints.up("sm")]: {
       width: 300,
