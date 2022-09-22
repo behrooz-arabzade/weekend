@@ -19,7 +19,7 @@ const SearchBox:FC = () => {
                 label="سرگرمی مورد علاقه خود را وارد کنید"
                 name="search"
                 value={tagName}
-                onChange={e=>{setTagName(e.target.value)}}
+                onChange={(e:any)=>{setTagName(e.target.value)}}
             />
         </div>
     )
