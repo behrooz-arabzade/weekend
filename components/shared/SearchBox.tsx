@@ -1,4 +1,7 @@
-import React,{useState, FC} from 'react'
+import React,
+{useState, FC} 
+from 'react'
+
 import {
     TextField
 } from '@mui/material';
@@ -16,7 +19,7 @@ const SearchBox:FC = () => {
         <div>
             <TextField
                 className={cx(classes.root)}
-                label="سرگرمی مورد علاقه خود را وارد کنید"
+                label=" لطفا سرگرمی مورد علاقه خود را وارد کنید"
                 name="search"
                 value={tagName}
                 onChange={(e:any)=>{setTagName(e.target.value)}}
