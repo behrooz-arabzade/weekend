@@ -1,8 +1,7 @@
 import type { NextPage } from "next";
 
 // Components
-import TagCard from "components/molecules/TagCard/TagCard";
-import SearchBox from './../components/Shared/SearchBox';
+import SearchBox from "components/Shared/SearchBox";
 
 
 
@@ -16,21 +15,19 @@ import Image from "next/image";
 
 //Css(Style Sheet)
 import styles from "../styles/Home.module.css";
+import { Container } from "@mui/system";
+import { Grid } from "@mui/material";
 
 
 const Home: NextPage = () => {
   return (
     <div className={styles.container}>
-      <TagCard
-        onSelect={() => {}}
-        tagId={1}
-        tagImageSrc="https://i1.sndcdn.com/artworks-Ln0wbWGPUpAfml94-LDaVMA-t500x500.jpg"
-        tagName="booling"
-        selected
-      />
-    
+      <Container>
+        <Grid display="flex" justifyContent="center" mt={3}>
+      <SearchBox />
+      </Grid>
+      </Container>
     </div>
   );
 };
-
 export default Home;
