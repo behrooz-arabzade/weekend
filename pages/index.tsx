@@ -1,7 +1,7 @@
 import type { NextPage } from "next";
 
 // Components
-import SearchBox from "components/Shared/SearchBox";
+import SearchBox from "../components/molecules/SearchBox/SearchBox";
 
 
 
@@ -24,7 +24,7 @@ const Home: NextPage = () => {
     <div className={styles.container}>
       <Container>
         <Grid display="flex" justifyContent="center" mt={3}>
-      <SearchBox />
+      <SearchBox title={["pool"]} hint="" defaultValue="" />
       </Grid>
       </Container>
     </div>
