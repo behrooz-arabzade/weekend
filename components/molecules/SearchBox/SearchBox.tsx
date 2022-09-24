@@ -1,50 +1,39 @@
-import React,
-{ useState, FC }
-    from 'react';
+import React, { FC, ChangeEvent } from "react";
 
-import {
-    Autocomplete,
-    TextField
-} from '@mui/material';
-
+import { TextField } from "@mui/material";
 
 //Style(JSS)
 import useSearchBoxStyle from "./useStyle";
 
 interface ISearch {
-    title: string[];
-    hint?: string | null;
-    defaultValue: string;
-};
-
-const SearchBox: FC<ISearch> = ({ title, hint, defaultValue }) => {
-    const { classes, cx } = useSearchBoxStyle();
-
-    const [userValue, setUserValue] = useState<string>(defaultValue);
-
-    const favourite = title;
-
-    const favouriteOptions = favourite.map((favourite, index) => ({
-        id: index + 1,
-        label: favourite
-    }))
-
-    const onSearchTextChange = (e: any, hint) => {
-        setUserValue(hint)
-    }
-
-    return (
-        <div>
-            <Autocomplete
-                options={favouriteOptions}
-                className={cx(classes.root)}
-                renderInput={params => <TextField {...params} label="plese insert your favourite" />}
-                value={userValue}
-                onChange={onSearchTextChange}
-                freeSolo
-            />
-        </div>
-    )
+  title?: string;
+  hint?: string;
+  defaultValue?: string;
+  onSearchTextChange: (searchText: string) => void;
 }
 
-export default SearchBox
+const SearchBox: FC<ISearch> = ({
+  title,
+  hint,
+  defaultValue,
+  onSearchTextChange,
+}) => {
+  const { classes, cx } = useSearchBoxStyle();
+
+  const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
+    onSearchTextChange(event.target.value);
+  };
+
+  return (
+    <TextField
+      classes={classes}
+      label={title}
+      type="search"
+      placeholder={hint}
+      defaultValue={defaultValue}
+      onChange={handleChange}
+    />
+  );
+};
+
+export default SearchBox;
