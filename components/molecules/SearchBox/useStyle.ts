@@ -3,7 +3,7 @@ import { makeStyles } from "tss-react/mui";
 
 
 
-const useStyle = makeStyles()((theme) => ({
+const useSearchBoxStyle = makeStyles()((theme) => ({
     root: {
         [theme.breakpoints.down("sm")]: {
             width: 300,
@@ -13,4 +13,4 @@ const useStyle = makeStyles()((theme) => ({
           },
     },
   }));
-export default useStyle;
+export default useSearchBoxStyle;

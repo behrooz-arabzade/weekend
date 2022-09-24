@@ -9,7 +9,7 @@ import {
 
 
 //Style(JSS)
-import useStyle from "./useStyle";
+import useSearchBoxStyle from "./useStyle";
 
 interface ISearch {
     title: string[];
@@ -18,7 +18,7 @@ interface ISearch {
 };
 
 const SearchBox: FC<ISearch> = ({ title, hint, defaultValue }) => {
-    const { classes, cx } = useStyle();
+    const { classes, cx } = useSearchBoxStyle();
 
     const [userValue, setUserValue] = useState<string>(defaultValue);
 
