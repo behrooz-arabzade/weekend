@@ -1,7 +1,7 @@
-import { createTheme } from "@mui/material/styles";
+import { createTheme } from "@mui/material";
 import breakpoints from "./breakpoints";
 import overrides from "./overrides";
-import defaultPalette from "./palettes/defaultPalette";
+import palette from "./palette";
 import { IThemeOptions } from "./types/theme";
 import typography from "./typography";
 
@@ -20,8 +20,6 @@ export const getThemeOptions = (palette: any): IThemeOptions => {
   };
 };
 
-export const lightTheme = createTheme(getThemeOptions(defaultPalette));
+const theme = createTheme(getThemeOptions(palette));
 
-const baseTheme = createTheme(getThemeOptions(defaultPalette));
-
-export default baseTheme;
+export default theme;
