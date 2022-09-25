@@ -22,7 +22,8 @@ const useLoginStyle = makeStyles()((theme) => ({
             background:"#3F50B5",
         },
         colorButton:{
-            color:"#fff"
+            color:"#fff",
+            width:"100%",
         },
         forgetButton:{
             display:"flex",
