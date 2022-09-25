@@ -1,7 +1,7 @@
 import type { NextPage } from "next";
 
 // Components
-import SearchBox from "components/Shared/SearchBox";
+import Login from "components/molecules/Login/Login";
 
 
 
@@ -19,13 +19,23 @@ import { Container } from "@mui/system";
 import { Grid } from "@mui/material";
 
 
+
 const Home: NextPage = () => {
   return (
     <div className={styles.container}>
       <Container>
-        <Grid display="flex" justifyContent="center" mt={3}>
-      <SearchBox />
-      </Grid>
+        <Grid display="flex" sx={{height:"100vh"}} justifyContent="center" alignItems="center" mt={3}>
+          <Login onSubmitClicked={(data) => {
+            console.log("user login", data)
+          }}
+            onRegisterClicked={() => {
+              console.log("register")
+            }}
+            onForgetPasswordClicked={()=> {
+              console.log("forgetPassword")
+            }}
+          />
+        </Grid>
       </Container>
     </div>
   );
