@@ -1,7 +1,7 @@
 import type { NextPage } from "next";
 
 // Components
-import SearchBox from "components/Shared/SearchBox";
+import MainHeader from "components/molecules/MainHeader/MainHeader";
 
 
 
@@ -19,13 +19,14 @@ import { Container } from "@mui/system";
 import { Grid } from "@mui/material";
 
 
+
 const Home: NextPage = () => {
   return (
     <div className={styles.container}>
       <Container>
         <Grid display="flex" justifyContent="center" mt={3}>
-      <SearchBox />
-      </Grid>
+          <MainHeader />
+        </Grid>
       </Container>
     </div>
   );
