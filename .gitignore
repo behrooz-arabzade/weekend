@@ -39,3 +39,8 @@ next-env.d.ts
 /public/sw.js
 /public/sw.js.map
 /public/workbox*
+
+# develop
+yarn.lock
+yarn-error.log
+package-lock.json
