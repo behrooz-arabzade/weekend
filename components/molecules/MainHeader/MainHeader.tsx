@@ -1,5 +1,5 @@
 import React from 'react'
-import { AppBar, Avatar, Card, Container, Divider, Toolbar, Typography } from '@mui/material';
+import { AppBar, Avatar, Card, Container, Divider, Toolbar, Typography, Button } from '@mui/material';
 
 
 
@@ -12,6 +12,10 @@ const MainHeader = () => {
 
     const { cx, classes } = useMainHeader();
 
+    const clickHandler = () => {
+        console.log("profile page")
+    }
+
     return (
         <AppBar color="transparent" position="fixed" className={cx(classes.root)}>
             <Divider className={cx(classes.headerDivider)} />
@@ -20,7 +24,7 @@ const MainHeader = () => {
                     <Typography component="h4" variant="h5" fontWeight="700" flex={1}>
                         Week<span className={cx(classes.spanLogo)} >End</span>
                     </Typography>
-                    <Avatar className={cx(classes.profileImg)} src="/Images/Aryan.jpg" />
+                    <Button onClick={clickHandler}><Avatar className={cx(classes.profileImg)} src="/Images/Aryan.jpg" /></Button>
                 </Toolbar>
             </Container>
         </AppBar>
