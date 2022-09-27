@@ -1,27 +1,19 @@
 import { makeStyles } from "tss-react/mui";
 
 const useMainNavigationStyle = makeStyles()((theme) => ({
-    root:{
-        [theme.breakpoints.up("sm")]: {
-            display:"none",
-        },
-        top:"auto",
-        bottom:0,
+  root: {
+    [theme.breakpoints.up("sm")]: {
+      display: "none",
     },
-    spanLogo:{
-        color: theme.palette.baseColor,
-    },
-        spanMessage:{
-            position: "absolute",
-            left: 15,
-            top: 3,
-            color: "#fff",
-            background: theme.palette.baseColor,
-            borderRadius: "25px",
-            padding: "0 5px",
-            fontSize: "0.5rem",
-            transition: "all 0.2s linear",
-        }
-}
-));
+    display: "flex",
+    width: "100%",
+  },
+  grid: {
+    flex: 1,
+    padding: 8,
+  },
+  gridSelected: {
+    color: theme.palette.selectedMenuBg,
+  },
+}));
 export default useMainNavigationStyle;
