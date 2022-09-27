@@ -20,7 +20,7 @@ const persistConfig = {
 
 // add all slices reducer in this reducer object
 const rootReducer = combineReducers({
-  [templateSlice.name]: templateSlice,
+  template: templateSlice,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
