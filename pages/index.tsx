@@ -16,38 +16,49 @@ import Image from "next/image";
 import styles from "../styles/Home.module.css";
 import { Container } from "@mui/system";
 import { Grid } from "@mui/material";
+import FeedPostHeader from './../components/molecules/FeedPostHeader/FeedPostHeader';
+
+
+const dataPosts = [
+  {
+    id: "234",
+    userName: "Aryan_Salemabadi",
+    serPicSrc: "/Images/Aryan.jpg",
+    date: "September 28, 2022",
+    link: "/post",
+  },
+];
+
 
 const Home: NextPage = () => {
   return (
     <div className={styles.container}>
-      <MainNavigation
-        items={[
-          {
-            id: "home",
-            icon: <HomeIcon />,
-          },
-          {
-            id: "search",
-            icon: <SearchIcon />,
-          },
-          {
-            id: "create",
-            icon: <Create />,
-          },
-          {
-            id: "eventActive",
-            icon: <EventActive />,
-          },
-          {
-            id: "message",
-            icon: <MessageIcon />,
-          },
-        ]}
-        onItemSelected={(id) => {
-          console.log("page", id);
-        }}
-        selectedItemId={"home"}
-      />
+      <Container>
+        {dataPosts.map(post => {
+          return (
+            <Grid m="50px 0px"
+              key={post.id}
+              display="flex"
+              justifyContent="center"
+              alignItems="center"
+            >
+              <FeedPostHeader
+                key={post.id}
+                userName={post.userName}
+                userPicSrc={post.serPicSrc}
+                date={post.date}
+                link={post.link}
+                onHideClicked={()=>{
+                  console.log("post is hide")
+                }}
+                onReportClicked={()=>{
+                  console.log("post report")
+                }}
+              />
+            </Grid>
+          )
+        })}
+      </Container>
     </div>
   );
 };
