@@ -1,7 +1,12 @@
 import type { NextPage } from "next";
 
 // Components
-import MainHeader from "components/molecules/MainHeader/MainHeader";
+import MainNavigation from "components/molecules/MainNavigation/MainNavigation";
+import HomeIcon from "components/molecules/MainNavigation/HomeIcon";
+import SearchIcon from "components/molecules/MainNavigation/Search";
+import Create from "components/molecules/MainNavigation/Create";
+import EventActive from "./../components/molecules/MainNavigation/EventActive";
+import MessageIcon from "./../components/molecules/MainNavigation/MessageIcon";
 
 //Icons
 import Head from "next/head";
@@ -15,11 +20,34 @@ import { Grid } from "@mui/material";
 const Home: NextPage = () => {
   return (
     <div className={styles.container}>
-      <Container>
-        <Grid display="flex" justifyContent="center" mt={3}>
-          <MainHeader />
-        </Grid>
-      </Container>
+      <MainNavigation
+        items={[
+          {
+            id: "home",
+            icon: <HomeIcon />,
+          },
+          {
+            id: "search",
+            icon: <SearchIcon />,
+          },
+          {
+            id: "create",
+            icon: <Create />,
+          },
+          {
+            id: "eventActive",
+            icon: <EventActive />,
+          },
+          {
+            id: "message",
+            icon: <MessageIcon />,
+          },
+        ]}
+        onItemSelected={(id) => {
+          console.log("page", id);
+        }}
+        selectedItemId={"home"}
+      />
     </div>
   );
 };
