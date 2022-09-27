@@ -1,7 +1,7 @@
 import type { NextPage } from "next";
 
 // Components
-import ForgetPassword from "./../components/molecules/ForgetPassword/ForgetPassword";
+import MainHeader from "components/molecules/MainHeader/MainHeader";
 
 //Icons
 import Head from "next/head";
@@ -16,23 +16,8 @@ const Home: NextPage = () => {
   return (
     <div className={styles.container}>
       <Container>
-        <Grid
-          height="100vh"
-          display="flex"
-          justifyContent="center"
-          alignItems="center"
-        >
-          <ForgetPassword
-            onSubmitClicked={(fg) => {
-              console.log("password send to", fg);
-            }}
-            onRegisterClicked={() => {
-              console.log("Register Page");
-            }}
-            onLoginClicked={() => {
-              console.log("Login Page");
-            }}
-          />
+        <Grid display="flex" justifyContent="center" mt={3}>
+          <MainHeader />
         </Grid>
       </Container>
     </div>
