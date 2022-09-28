@@ -7,6 +7,8 @@ import SearchIcon from "components/molecules/MainNavigation/Search";
 import Create from "components/molecules/MainNavigation/Create";
 import EventActive from "./../components/molecules/MainNavigation/EventActive";
 import MessageIcon from "./../components/molecules/MainNavigation/MessageIcon";
+import FeedPostFooter from "components/molecules/FeedPostFooter/FeedPostFooter";
+
 
 //Icons
 import Head from "next/head";
@@ -17,37 +19,29 @@ import styles from "../styles/Home.module.css";
 import { Container } from "@mui/system";
 import { Grid } from "@mui/material";
 
+
 const Home: NextPage = () => {
   return (
     <div className={styles.container}>
-      <MainNavigation
-        items={[
-          {
-            id: "home",
-            icon: <HomeIcon />,
-          },
-          {
-            id: "search",
-            icon: <SearchIcon />,
-          },
-          {
-            id: "create",
-            icon: <Create />,
-          },
-          {
-            id: "eventActive",
-            icon: <EventActive />,
-          },
-          {
-            id: "message",
-            icon: <MessageIcon />,
-          },
-        ]}
-        onItemSelected={(id) => {
-          console.log("page", id);
-        }}
-        selectedItemId={"home"}
-      />
+      <Container>
+    <Grid height="100vh"
+     display="flex"
+      justifyContent="center"
+       alignItems="center"
+       >
+        <FeedPostFooter 
+          reactionCount={10}
+          currentReactionId = {3}
+          onSaveClicked={()=>{
+            console.log("post saved")
+          }}
+          onCommentsClicked={()=>{
+            console.log("comment")
+          }}
+
+        />
+    </Grid>
+    </Container>
     </div>
   );
 };
