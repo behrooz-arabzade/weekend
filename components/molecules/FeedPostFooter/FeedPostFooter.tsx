@@ -16,6 +16,9 @@ import BookmarkBorderOutlinedIcon from '@mui/icons-material/BookmarkBorderOutlin
 
 
 
+//Component
+
+
 //InterFace
 
 interface IFeedPostFooter {
