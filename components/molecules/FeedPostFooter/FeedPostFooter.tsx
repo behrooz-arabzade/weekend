@@ -70,7 +70,7 @@ const FeedPostFooter: FC<IFeedPostFooter> = ({
                     </Grid>
                     <Grid>
                         <IconButton onClick={likeClick} aria-label="reaction">
-                            <ReactionButton/>
+                            {/* <ReactionButton/> */}
                         </IconButton>
                     </Grid>
                 </Grid>

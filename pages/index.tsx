@@ -7,7 +7,7 @@ import SearchIcon from "components/molecules/MainNavigation/Search";
 import Create from "components/molecules/MainNavigation/Create";
 import EventActive from "./../components/molecules/MainNavigation/EventActive";
 import MessageIcon from "./../components/molecules/MainNavigation/MessageIcon";
-import FeedPostFooter from "components/molecules/FeedPostFooter/FeedPostFooter";
+
 
 
 //Icons
@@ -18,30 +18,21 @@ import Image from "next/image";
 import styles from "../styles/Home.module.css";
 import { Container } from "@mui/system";
 import { Grid } from "@mui/material";
+import FeedPostComment from "components/molecules/FeedPostComment/FeedPostComment";
 
 
 const Home: NextPage = () => {
   return (
     <div className={styles.container}>
       <Container>
-    <Grid height="100vh"
-     display="flex"
-      justifyContent="center"
-       alignItems="center"
-       >
-        <FeedPostFooter 
-          reactionCount={10}
-          currentReactionId = {3}
-          onSaveClicked={()=>{
-            console.log("post saved")
-          }}
-          onCommentsClicked={()=>{
-            console.log("comment")
-          }}
-
-        />
-    </Grid>
-    </Container>
+        <Grid height="100vh"
+          display="flex"
+          justifyContent="center"
+          alignItems="center"
+        >
+          <FeedPostComment />
+        </Grid>
+      </Container>
     </div>
   );
 };
