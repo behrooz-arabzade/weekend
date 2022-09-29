@@ -12,12 +12,16 @@ import useFeedPostFooter from './useStyle';
 //Icons
 import ModeCommentOutlinedIcon from '@mui/icons-material/ModeCommentOutlined';
 import BookmarkBorderOutlinedIcon from '@mui/icons-material/BookmarkBorderOutlined';
+import UnLike from 'components/molecules/ReactionButton/UnLike';
+import Like from 'components/molecules/ReactionButton/Like';
+import Idea from 'components/molecules/ReactionButton/Idea';
+
 
 
 
 
 //Component
-
+import ReactionButton from 'components/molecules/ReactionButton/ReactionButton';
 
 //InterFace
 
@@ -49,11 +53,11 @@ const FeedPostFooter: FC<IFeedPostFooter> = ({
         onSaveClicked();
     }
 
-    const likeClick = () => {
-        console.log(currentReactionId)
+    const reactionClick = () => {
         if (click) {
             setReaction(reactionCount + 1);
             setClick(false);
+
         }
         else {
             setReaction(reaction - 1);
@@ -62,19 +66,47 @@ const FeedPostFooter: FC<IFeedPostFooter> = ({
     }
 
     console.log(reactionCount)
+    
     return (
         <Container>
-            <Grid display="flex" justifyContent="space-between">
+            <Grid
+                display="flex"
+                justifyContent="space-between"
+            >
                 <Grid display="flex">
                     <Grid>
-                        <IconButton onClick={clickComment} aria-label="comment">
+                        <IconButton
+                            onClick={clickComment}
+                            aria-label="comment"
+                        >
                             <ModeCommentOutlinedIcon></ModeCommentOutlinedIcon>
                         </IconButton>
                     </Grid>
                     <Grid>
-                        <IconButton onClick={likeClick} aria-label="reaction">
-                            <ReactionButton/>
-                        </IconButton>
+                        <ReactionButton
+                            reactionClick={reactionClick}
+                            items={
+                                [
+                                    {
+                                        id: 1,
+                                        icon: <Like />
+                                    },
+
+                                    {
+                                        id: 2,
+                                        icon: <UnLike />
+                                    },
+                                    {
+                                        id: 3,
+                                        icon: <Idea />
+                                    },
+                                ]
+                            }
+                            onReactionSelecte={(reactionId) => {
+                                console.log(reactionId)
+                            }}
+                            selectedItemId={1}
+                        />
                     </Grid>
                 </Grid>
 
@@ -84,7 +116,9 @@ const FeedPostFooter: FC<IFeedPostFooter> = ({
                     </IconButton>
                 </Grid>
             </Grid>
-            <Typography fontWeight="bold" ml={2}> <span className={cx(classes.spanLike)}> {reaction} </span> reactions </Typography>
+            <Typography fontWeight="bold" ml={2}>
+                <span className={cx(classes.spanLike)}> {reaction} </span> reactions
+            </Typography>
         </Container >
     )
 }
