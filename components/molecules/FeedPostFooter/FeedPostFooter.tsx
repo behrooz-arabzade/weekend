@@ -11,9 +11,8 @@ import useFeedPostFooter from './useStyle';
 
 //Icons
 import ModeCommentOutlinedIcon from '@mui/icons-material/ModeCommentOutlined';
-import FavoriteBorderOutlinedIcon from '@mui/icons-material/FavoriteBorderOutlined';
 import BookmarkBorderOutlinedIcon from '@mui/icons-material/BookmarkBorderOutlined';
-import FavoriteOutlinedIcon from '@mui/icons-material/FavoriteOutlined';
+
 
 
 
@@ -35,7 +34,7 @@ const FeedPostFooter: FC<IFeedPostFooter> = ({
 
     const { classes, cx } = useFeedPostFooter();
 
-    const [like, setLike] = useState<number>(reactionCount);
+    const [reaction, setReaction] = useState<number>(reactionCount);
 
     const [click, setClick] = useState<boolean>(true)
 
@@ -50,11 +49,11 @@ const FeedPostFooter: FC<IFeedPostFooter> = ({
     const likeClick = () => {
         console.log(currentReactionId)
         if (click) {
-            setLike(reactionCount + 1);
+            setReaction(reactionCount + 1);
             setClick(false);
         }
         else {
-            setLike(like - 1);
+            setReaction(reaction - 1);
             setClick(true);
         }
     }
@@ -71,17 +70,8 @@ const FeedPostFooter: FC<IFeedPostFooter> = ({
                     </Grid>
                     <Grid>
                         <IconButton onClick={likeClick} aria-label="reaction">
-                            {
-                                !click
-                                    ?
-                                    <FavoriteOutlinedIcon className={cx(classes.likeIcon)}></FavoriteOutlinedIcon>
-                                    :
-                                    <FavoriteBorderOutlinedIcon className={cx(classes.likeIcon)}></FavoriteBorderOutlinedIcon>
-                            }
+                            <ReactionButton/>
                         </IconButton>
-                    </Grid>
-                    <Grid>
-                        {/* this place for reaction button */}
                     </Grid>
                 </Grid>
 
@@ -91,7 +81,7 @@ const FeedPostFooter: FC<IFeedPostFooter> = ({
                     </IconButton>
                 </Grid>
             </Grid>
-            <Typography fontWeight="bold" ml={2}> <span className={cx(classes.spanLike)}> {like} </span> Like </Typography>
+            <Typography fontWeight="bold" ml={2}> <span className={cx(classes.spanLike)}> {reaction} </span> reactions </Typography>
         </Container >
     )
 }
