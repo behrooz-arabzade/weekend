@@ -1,126 +1,94 @@
-import React, { FC, useState } from 'react'
-import { Container, Grid, IconButton, Typography } from '@mui/material';
-
-
-
+import React, { FC, useState } from "react";
+import { Container, Grid, IconButton, Typography } from "@mui/material";
 
 //Css(Style Sheet)
-import useFeedPostFooter from './useStyle';
-
-
+import useFeedPostFooter from "./useStyle";
 
 //Icons
-import ModeCommentOutlinedIcon from '@mui/icons-material/ModeCommentOutlined';
-import BookmarkBorderOutlinedIcon from '@mui/icons-material/BookmarkBorderOutlined';
-import UnLike from 'components/molecules/ReactionButton/UnLike';
-import Like from 'components/molecules/ReactionButton/Like';
-import Idea from 'components/molecules/ReactionButton/Idea';
-
-
-
-
+import ModeCommentOutlinedIcon from "@mui/icons-material/ModeCommentOutlined";
+import BookmarkBorderOutlinedIcon from "@mui/icons-material/BookmarkBorderOutlined";
+import UnLike from "components/molecules/ReactionButton/UnLike";
+import Like from "components/molecules/ReactionButton/Like";
+import Idea from "components/molecules/ReactionButton/Idea";
 
 //Component
-import ReactionButton from 'components/molecules/ReactionButton/ReactionButton';
+import ReactionButton from "components/molecules/ReactionButton/ReactionButton";
 
 //InterFace
 
 interface IFeedPostFooter {
-    reactionCount: number;
-    currentReactionId: number;
-    onSaveClicked: () => void;
-    onCommentsClicked: () => void;
+  reactionCount: number;
+  currentReactionId: number;
+  onSaveClicked: () => void;
+  onCommentsClicked: () => void;
 }
 
 const FeedPostFooter: FC<IFeedPostFooter> = ({
-    reactionCount,
-    currentReactionId,
-    onSaveClicked,
-    onCommentsClicked
+  reactionCount,
+  currentReactionId,
+  onSaveClicked,
+  onCommentsClicked,
 }) => {
+  const { classes, cx } = useFeedPostFooter();
 
-    const { classes, cx } = useFeedPostFooter();
+  const clickComment = () => {
+    onCommentsClicked();
+  };
 
-    const [reaction, setReaction] = useState<number>(reactionCount);
+  const savedClick = () => {
+    onSaveClicked();
+  };
 
-    const [click, setClick] = useState<boolean>(true)
+  const handleReactionSelected = (reactionId: number) => {
+    // TODO handle reaction clicked
+  };
 
-    const clickComment = () => {
-        onCommentsClicked();
-    };
+  console.log(reactionCount);
 
-    const savedClick = () => {
-        onSaveClicked();
-    }
+  return (
+    <Container>
+      <Grid display="flex" justifyContent="space-between">
+        <Grid display="flex">
+          <Grid>
+            <IconButton onClick={clickComment} aria-label="comment">
+              <ModeCommentOutlinedIcon></ModeCommentOutlinedIcon>
+            </IconButton>
+          </Grid>
+          <Grid>
+            <ReactionButton
+              items={[
+                {
+                  id: 1,
+                  icon: <Like />,
+                },
 
-    const reactionClick = () => {
-        if (click) {
-            setReaction(reactionCount + 1);
-            setClick(false);
+                {
+                  id: 2,
+                  icon: <UnLike />,
+                },
+                {
+                  id: 3,
+                  icon: <Idea />,
+                },
+              ]}
+              onReactionSelected={handleReactionSelected}
+              selectedItemId={currentReactionId}
+            />
+          </Grid>
+        </Grid>
 
-        }
-        else {
-            setReaction(reaction - 1);
-            setClick(true);
-        }
-    }
+        <Grid>
+          <IconButton onClick={savedClick} aria-label="bookmark">
+            <BookmarkBorderOutlinedIcon></BookmarkBorderOutlinedIcon>
+          </IconButton>
+        </Grid>
+      </Grid>
+      <Typography fontWeight="bold" ml={2}>
+        <span className={cx(classes.spanLike)}> {reactionCount} </span>{" "}
+        reactions
+      </Typography>
+    </Container>
+  );
+};
 
-    console.log(reactionCount)
-    
-    return (
-        <Container>
-            <Grid
-                display="flex"
-                justifyContent="space-between"
-            >
-                <Grid display="flex">
-                    <Grid>
-                        <IconButton
-                            onClick={clickComment}
-                            aria-label="comment"
-                        >
-                            <ModeCommentOutlinedIcon></ModeCommentOutlinedIcon>
-                        </IconButton>
-                    </Grid>
-                    <Grid>
-                        <ReactionButton
-                            reactionClick={reactionClick}
-                            items={
-                                [
-                                    {
-                                        id: 1,
-                                        icon: <Like />
-                                    },
-
-                                    {
-                                        id: 2,
-                                        icon: <UnLike />
-                                    },
-                                    {
-                                        id: 3,
-                                        icon: <Idea />
-                                    },
-                                ]
-                            }
-                            onReactionSelecte={(reactionId) => {
-                                console.log(reactionId)
-                            }}
-                            selectedItemId={1}
-                        />
-                    </Grid>
-                </Grid>
-
-                <Grid>
-                    <IconButton onClick={savedClick} aria-label="bookmark">
-                        <BookmarkBorderOutlinedIcon></BookmarkBorderOutlinedIcon>
-                    </IconButton>
-                </Grid>
-            </Grid>
-            <Typography fontWeight="bold" ml={2}>
-                <span className={cx(classes.spanLike)}> {reaction} </span> reactions
-            </Typography>
-        </Container >
-    )
-}
-
-export default FeedPostFooter
+export default FeedPostFooter;

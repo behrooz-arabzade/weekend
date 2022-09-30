@@ -1,5 +1,5 @@
 import React, { useState, MouseEvent, ReactNode, FC } from "react";
-import { Button, Popover,IconButton } from "@mui/material";
+import { Button, Popover, IconButton } from "@mui/material";
 
 //Icon
 import Like from "components/molecules/ReactionButton/Like";
@@ -13,16 +13,14 @@ interface IReactionButton {
     id: number;
     icon: ReactNode;
   }>;
-  onReactionSelecte: (reactionId: number) => void;
+  onReactionSelected: (reactionId: number) => void;
   selectedItemId: number;
-  reactionClick:() => void;
 }
 
 const ReactionButton: FC<IReactionButton> = ({
   items,
-  onReactionSelecte,
+  onReactionSelected,
   selectedItemId,
-  reactionClick
 }) => {
   const { classes, cx } = useReactionButton();
 
@@ -36,14 +34,12 @@ const ReactionButton: FC<IReactionButton> = ({
   };
 
   const selectHandler = (id: number) => () => {
-    onReactionSelecte(id);
-    reactionClick()
+    onReactionSelected(id);
   };
 
   const closeHandler = () => {
     setAnchorEl(null);
     setOpenReaction(false);
-
   };
 
   const open = Boolean(anchorEl);
