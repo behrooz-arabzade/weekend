@@ -12,7 +12,7 @@ import ReactionButton from "components/molecules/ReactionButton/ReactionButton";
 import Like from "components/molecules/ReactionButton/Like";
 import UnLike from "components/molecules/ReactionButton/UnLike";
 import Idea from "components/molecules/ReactionButton/Idea";
-
+import FriendCard from "components/molecules/FriendCard/FriendCard";
 
 
 //Icons
@@ -28,6 +28,7 @@ import { Grid } from "@mui/material";
 
 
 
+
 const Home: NextPage = () => {
   return (
     <div className={styles.container}>
@@ -38,31 +39,11 @@ const Home: NextPage = () => {
           justifyContent="center"
           alignItems="center"
         >
-          <ReactionButton
-            items={
-              [
-                {
-                  id: 1,
-                  icon: <Like />
-                },
-
-                {
-                  id: 2,
-                  icon: <UnLike />
-                },
-                {
-                  id: 3,
-                  icon: <Idea />
-                },
-              ]
-            }
-
-            onReactionSelecte={(reactionId) => {
-              console.log(reactionId)
-            }}
-
-            selectedItemId={1}
-
+          <FriendCard 
+          name="Aryan_Salemabadi"
+          picSrc="Images/Aryan.jpg"
+          variant="friend"
+          onlineStatus="online"
           />
         </Grid>
       </Container>
