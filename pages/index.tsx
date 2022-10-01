@@ -7,6 +7,7 @@ import SearchIcon from "components/molecules/MainNavigation/Search";
 import Create from "components/molecules/MainNavigation/Create";
 import EventActive from "./../components/molecules/MainNavigation/EventActive";
 import MessageIcon from "./../components/molecules/MainNavigation/MessageIcon";
+import FeedPostFooter from "components/molecules/FeedPostFooter/FeedPostFooter";
 import FeedPostHeader from './../components/molecules/FeedPostHeader/FeedPostHeader';
 import ReactionButton from "components/molecules/ReactionButton/ReactionButton";
 import Like from "components/molecules/ReactionButton/Like";
