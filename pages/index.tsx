@@ -13,6 +13,7 @@ import ReactionButton from "components/molecules/ReactionButton/ReactionButton";
 import Like from "components/molecules/ReactionButton/Like";
 import UnLike from "components/molecules/ReactionButton/UnLike";
 import Idea from "components/molecules/ReactionButton/Idea";
+import UserProfileDetails from 'components/molecules/UserProfileDetails/UserProfileDetails';
 
 
 
@@ -25,29 +26,20 @@ import styles from "../styles/Home.module.css";
 import { Container } from "@mui/system";
 import { Grid } from "@mui/material";
 
+
 const Home: NextPage = () => {
   return (
     <div className={styles.container}>
       <Container>
-    <Grid 
-    height="100vh"
-     display="flex"
-      justifyContent="center"
-       alignItems="center"
-       >
-        <FeedPostFooter 
-          reactionCount={10}
-          currentReactionId = {3}
-          onSaveClicked={()=>{
-            console.log("post saved")
-          }}
-          onCommentsClicked={()=>{
-            console.log("comment")
-          }}
-
-        />
-    </Grid>
-    </Container>
+        <Grid
+          height="100vh"
+          display="flex"
+          justifyContent="center"
+          alignItems="center"
+        >
+          <UserProfileDetails />
+        </Grid>
+      </Container>
     </div>
   );
 };
