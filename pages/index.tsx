@@ -39,11 +39,17 @@ const Home: NextPage = () => {
           justifyContent="center"
           alignItems="center"
         >
-          <FriendCard 
-          name="Aryan_Salemabadi"
-          picSrc="Images/Aryan.jpg"
-          variant="friend"
-          onlineStatus="online"
+          <FriendCard
+            name="Aryan_Salemabadi"
+            picSrc="Images/Aryan.jpg"
+            variant="request"
+            onlineStatus="online"
+            onClick={() => { console.log("onClick") }}
+            onAcceptRequest={() => { }}
+            onRejectRequest={() => { }}
+            onRemoveFriend={() => { console.log("onRemoveFriend") }}
+            onUnblock={() => { }}
+            userId={1}
           />
         </Grid>
       </Container>
