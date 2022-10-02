@@ -9,7 +9,7 @@ import LockIcon from "@mui/icons-material/Lock";
 
 //InterFaces
 interface IForgetPassword {
-  onSubmitClicked: (email: string) => void;
+  onComplete: (message: string) => void;
   onRegisterClicked: () => void;
   onLoginClicked: () => void;
 }
@@ -19,38 +19,36 @@ interface IDataFrogetPassword {
 }
 
 const ForgetPassword: FC<IForgetPassword> = ({
-  onSubmitClicked,
+  onComplete,
   onRegisterClicked,
   onLoginClicked,
 }) => {
   const { classes, cx } = useForgetPassword();
 
-  const [dataFogetPassword, setDataForgetPassword] =
-    useState<IDataFrogetPassword>({
-      email: "",
-    });
+  const [email, setEmail] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
 
-  const cheangeHandler = (e: any) => {
-    setDataForgetPassword({
-      ...dataFogetPassword,
-      [e.target.name]: e.target.value,
-    });
-  };
-  const submitHandler = () => {
-    onSubmitClicked(dataFogetPassword.email);
+  const onChangeEmail = (e: any) => {
+    setEmail(e.target.value)
   };
 
-  const logindHandler = () => {
+  const handleSubmit = () => {
+    setLoading(true)
+    // TODO handle api here
+  };
+
+  const handleLoginClick = () => {
     onLoginClicked();
   };
 
-  const registerHandler = () => {
+  const handleRegisterClick = () => {
     onRegisterClicked();
   };
 
   const resultVariEmail =
     /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(
-      dataFogetPassword.email
+      email
     ) === true
       ? true
       : false;
@@ -68,8 +66,8 @@ const ForgetPassword: FC<IForgetPassword> = ({
       </Typography>
       <TextField
         name="email"
-        onChange={cheangeHandler}
-        value={dataFogetPassword.email}
+        onChange={onChangeEmail}
+        value={email}
         fullWidth
         className={cx(classes.user)}
         variant="outlined"
@@ -81,20 +79,21 @@ const ForgetPassword: FC<IForgetPassword> = ({
         )}
       >
         <Button
-          onClick={submitHandler}
-          disabled={!resultVariEmail}
+          onClick={handleSubmit}
+          disabled={!resultVariEmail || loading}
           className={cx(resultVariEmail ? classes.ButtonOn : classes.ButtonOff)}
         >
           <Typography>send recovery password</Typography>
         </Button>
       </div>
+      <Typography className={cx(classes.error)}>{error}</Typography>
       <div className={cx(classes.loginButton)}>
-        <Button onClick={logindHandler} color="inherit">
+        <Button onClick={handleLoginClick} color="inherit">
           <Typography>Login</Typography>
         </Button>
       </div>
       <div className={cx(classes.registerButton)}>
-        <Button onClick={registerHandler} color="inherit">
+        <Button onClick={handleRegisterClick} color="inherit">
           <Typography mr={1} color="primary">
             {" "}
             Register{" "}
