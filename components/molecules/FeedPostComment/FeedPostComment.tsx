@@ -13,6 +13,8 @@ import MoreVertIcon from '@mui/icons-material/MoreVert';
 import ModeCommentOutlinedIcon from '@mui/icons-material/ModeCommentOutlined';
 import FavoriteBorderOutlinedIcon from '@mui/icons-material/FavoriteBorderOutlined';
 import FavoriteOutlinedIcon from '@mui/icons-material/FavoriteOutlined';
+import { reactions } from '../ReactionButton/constants';
+import ReactionButton from '../ReactionButton/ReactionButton';
 
 
 //InterFace
@@ -23,7 +25,7 @@ interface IFeedPostComment {
     likeCount: number;
     onHideClicked: () => void;
     onReportClicked: () => void;
-
+    selectedReactionId: number
 }
 
 
@@ -33,32 +35,21 @@ const FeedPostComment: FC<IFeedPostComment> = ({
     comment,
     likeCount,
     onHideClicked,
-    onReportClicked
-
+    onReportClicked,
+    selectedReactionId
 }) => {
 
     const { classes, cx } = useFeedPostComment();
 
-    const [like, setLike] = useState<number>(likeCount);
-
-    const [click, setClick] = useState<boolean>(true)
+    const [hide, setHide] = useState<boolean>(false)
 
     const [anchorEl, setAnchorEl] = useState<null>(null);
 
-    const [hide, setHide] = useState<boolean>(false)
-
-    const handleClick = (event: any) => {
+    const handleClickMenu = (event: any) => {
         setAnchorEl(event.currentTarget);
     };
 
-    const open = Boolean(anchorEl);
-
-    const handleClose = () => {
-        setAnchorEl(null);
-    };
-
-    const linkClick = () => {
-
+    const handleCloseMenu = () => {
         setAnchorEl(null);
     };
 
@@ -69,21 +60,13 @@ const FeedPostComment: FC<IFeedPostComment> = ({
 
     const hideHandler = () => {
         onHideClicked();
-        setHide(true);
+        setHide(true)
         setAnchorEl(null);
     };
 
-    const likeClick = () => {
-        if (click) {
-            setLike(likeCount + 1);
-            setClick(false);
-        }
-        else {
-            setLike(like - 1);
-            setClick(true);
-        }
+    const handleCommentClick = () => {
+        // TODO navigate to the post page
     }
-
 
     return (
         <Grid
@@ -94,47 +77,43 @@ const FeedPostComment: FC<IFeedPostComment> = ({
             hidden={hide}
         >
             <Box hidden={hide} component="div" display="flex" justifyContent="space-between" >
-
                 <Grid display="flex">
                     <Avatar src={userPicSrc}></Avatar>
                     <Grid mx={2}>
                         <Typography component="span" fontWeight={700} >
                             {userName}
                         </Typography>
-                        <Typography mr={1} component="p" variant="p">
+                        <Typography mr={1} component="p">
                             {comment}
                         </Typography>
                         <Grid display="flex">
-                            <IconButton>
+                            <IconButton
+                                onClick={handleCommentClick}
+                            >
                                 <ModeCommentOutlinedIcon></ModeCommentOutlinedIcon>
                             </IconButton>
-                            <IconButton onClick={likeClick} aria-label="reaction">
-                                {
-                                    !click
-                                        ?
-                                        <FavoriteOutlinedIcon className={cx(classes.likeIcon)}></FavoriteOutlinedIcon>
-                                        :
-                                        <FavoriteBorderOutlinedIcon className={cx(classes.likeIcon)}></FavoriteBorderOutlinedIcon>
-                                }
-                            </IconButton>
-                            <Typography fontWeight="bold" mt={2}> <span className={cx(classes.spanLike)}> {like} </span> Like </Typography>
+                            <ReactionButton
+                                items={reactions}
+                                selectedItemId={selectedReactionId}
+                            />
+                            <Typography fontWeight="bold" mt={2}> <span className={cx(classes.spanLike)}> {likeCount} </span> reactions </Typography>
                         </Grid>
                     </Grid>
                 </Grid>
                 <Grid >
                     <IconButton
                         aria-label="more"
-                        onClick={handleClick}
+                        onClick={handleClickMenu}
                         aria-haspopup="true"
                         aria-controls="long-menu"
                     >
-                        <MoreVertIcon onClick={handleClick}></MoreVertIcon>
+                        <MoreVertIcon onClick={handleClickMenu}></MoreVertIcon>
                     </IconButton>
                     <Menu
                         id="simple-menu"
                         anchorEl={anchorEl}
-                        open={anchorEl}
-                        onClose={handleClose}
+                        open={Boolean(anchorEl)}
+                        onClose={handleCloseMenu}
                     >
                         <MenuItem onClick={reportHandler}>Report</MenuItem>
                         <MenuItem onClick={hideHandler}>Hide</MenuItem>
