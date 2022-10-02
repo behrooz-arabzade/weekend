@@ -1,10 +1,9 @@
-import React, { FC, MouseEventHandler, useEffect, useState } from "react";
+import React, { FC, useState } from "react";
 
 import { Button, Card, TextField, Typography } from "@mui/material";
 
 //CSS(Style Sheets)
 import useLoginStyle from "./useStyle";
-import { useRouter } from "next/router";
 
 interface ILogin {
   onLoginComplete: () => void;
@@ -29,8 +28,6 @@ const Login: FC<ILogin> = ({
   const [loading, setLoading] = useState<Boolean>(false);
   const [error, setError] = useState<string>("");
 
-  const router = useRouter();
-
   const onUserChange = (e: any) => {
     setUser(e.target.value);
   };
@@ -51,12 +48,6 @@ const Login: FC<ILogin> = ({
   const forgetPasswordHandler = () => {
     onForgetPasswordClicked();
   };
-
-  useEffect(() => {
-    router.prefetch("/register")
-    router.prefetch("/forget-password")
-  }, [])
-
 
   return (
     <Card className={cx(classes.root)}>
@@ -87,9 +78,9 @@ const Login: FC<ILogin> = ({
       <br />
       <div className={cx(classes.loginButton)}>
         <Button
-          disabled={loading}
           onClick={submitHandler}
           className={cx(classes.colorButton)}
+          disabled={loading}
         >
           <Typography>Login</Typography>
         </Button>
