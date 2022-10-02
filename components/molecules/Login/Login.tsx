@@ -1,12 +1,13 @@
-import React, { FC, MouseEventHandler, useState } from "react";
+import React, { FC, MouseEventHandler, useEffect, useState } from "react";
 
 import { Button, Card, TextField, Typography } from "@mui/material";
 
 //CSS(Style Sheets)
 import useLoginStyle from "./useStyle";
+import { useRouter } from "next/router";
 
 interface ILogin {
-  onSubmitClicked: (username: string, password: string) => void;
+  onLoginComplete: () => void;
   onRegisterClicked: () => void;
   onForgetPasswordClicked: () => void;
 }
@@ -17,23 +18,30 @@ interface IData {
 }
 
 const Login: FC<ILogin> = ({
-  onSubmitClicked,
+  onLoginComplete,
   onRegisterClicked,
   onForgetPasswordClicked,
 }) => {
   const { classes, cx } = useLoginStyle();
 
-  const [data, setData] = useState<IData>({
-    user: "",
-    password: "",
-  });
+  const [user, setUser] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
+  const [loading, setLoading] = useState<Boolean>(false);
+  const [error, setError] = useState<string>("");
 
-  const cheangeHandler = (e: any) => {
-    setData({ ...data, [e.target.name]: e.target.value });
+  const router = useRouter();
+
+  const onUserChange = (e: any) => {
+    setUser(e.target.value);
+  };
+
+  const onPasswordChange = (e: any) => {
+    setPassword(e.target.value);
   };
 
   const submitHandler = () => {
-    onSubmitClicked(data.user, data.password);
+    // TODO Handle Login api here
+    setLoading(true)
   };
 
   const registerHandler = () => {
@@ -44,6 +52,12 @@ const Login: FC<ILogin> = ({
     onForgetPasswordClicked();
   };
 
+  useEffect(() => {
+    router.prefetch("/register")
+    router.prefetch("/forget-password")
+  }, [])
+
+
   return (
     <Card className={cx(classes.root)}>
       <Typography className={cx(classes.logo)}>
@@ -53,8 +67,8 @@ const Login: FC<ILogin> = ({
       </Typography>
       <TextField
         name="user"
-        onChange={cheangeHandler}
-        value={data.user}
+        onChange={onUserChange}
+        value={user}
         fullWidth
         className={cx(classes.user)}
         variant="outlined"
@@ -63,8 +77,8 @@ const Login: FC<ILogin> = ({
       <br />
       <TextField
         name="password"
-        onChange={cheangeHandler}
-        value={data.password}
+        onChange={onPasswordChange}
+        value={password}
         fullWidth
         type="password"
         variant="outlined"
@@ -72,10 +86,15 @@ const Login: FC<ILogin> = ({
       />
       <br />
       <div className={cx(classes.loginButton)}>
-        <Button onClick={submitHandler} className={cx(classes.colorButton)}>
+        <Button
+          disabled={loading}
+          onClick={submitHandler}
+          className={cx(classes.colorButton)}
+        >
           <Typography>Login</Typography>
         </Button>
       </div>
+      <Typography className={cx(classes.error)}>{error}</Typography>
       <div className={cx(classes.forgetButton)}>
         <Button onClick={forgetPasswordHandler} color="inherit">
           <Typography>رمز عبور خود را فراموش کردید ؟</Typography>
