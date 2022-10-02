@@ -27,19 +27,58 @@ import { Container } from "@mui/system";
 import { Grid } from "@mui/material";
 
 
+
+
+
 const Home: NextPage = () => {
+
+   const UserInfo = {
+    picSrc: "Images/Aryan.jpg",
+    username: "Aryan_Salemabadi",
+    firstname: "Aryan",
+    lastname: "Salemabadi",
+    country: "Iran",
+    city: "Tehran",
+    friendCount: 86,
+    postTagedCount: 25,
+    contactInfo: {
+     mobile: "09215531809",
+     address: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua",
+    },
+   }
+
   return (
     <div className={styles.container}>
-      <Container>
         <Grid
           height="100vh"
           display="flex"
           justifyContent="center"
-          alignItems="center"
+          alignItems="flex-start"
+          mt={2}
         >
-          <UserProfileDetails />
+          <UserProfileDetails
+          
+
+           
+           onFriendRequestClicked={()=>{
+
+            alert("send  Request Friend")
+
+           }}
+
+           onBlockClicked={()=>{
+            alert("user blocked")
+           }}
+
+           onFriendsClicked={()=>{
+            alert("friends list page")
+          }}
+        
+
+          UserInfo={UserInfo}
+
+          />
         </Grid>
-      </Container>
     </div>
   );
 };
