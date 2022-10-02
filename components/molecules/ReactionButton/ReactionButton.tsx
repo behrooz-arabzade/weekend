@@ -13,7 +13,7 @@ interface IReactionButton {
     id: number;
     icon: ReactNode;
   }>;
-  onReactionSelected: (reactionId: number) => void;
+  onReactionSelected?: (reactionId: number) => void;
   selectedItemId: number;
 }
 
@@ -28,13 +28,17 @@ const ReactionButton: FC<IReactionButton> = ({
 
   const [openReaction, setOpenReaction] = useState<boolean>(false);
 
+  const [selectedItemIdState, setSelectedItemIdState] = useState<number>(selectedItemId);
+
   const clickHandler = (event: MouseEvent<HTMLButtonElement>) => {
     setAnchorEl(event.currentTarget);
     setOpenReaction(true);
   };
 
   const selectHandler = (id: number) => () => {
-    onReactionSelected(id);
+    // TODO handle reaction api here
+    setSelectedItemIdState(id);
+    onReactionSelected && onReactionSelected(id);
   };
 
   const closeHandler = () => {
@@ -75,7 +79,7 @@ const ReactionButton: FC<IReactionButton> = ({
               <Button
                 key={item.id}
                 onClick={selectHandler(item.id)}
-                color={selectedItemId === item.id ? "warning" : "inherit"}
+                color={selectedItemIdState === item.id ? "warning" : "inherit"}
               >
                 {item.icon}
               </Button>

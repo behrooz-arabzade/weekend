@@ -77,6 +77,24 @@ const FeedPostFooter: FC<IFeedPostFooter> = ({
           </Grid>
         </Grid>
 
+<<<<<<< HEAD
+    console.log(reactionCount)
+    return (
+        <Container>
+            <Grid display="flex" justifyContent="space-between">
+                <Grid display="flex">
+                    <Grid>
+                        <IconButton onClick={clickComment} aria-label="comment">
+                            <ModeCommentOutlinedIcon></ModeCommentOutlinedIcon>
+                        </IconButton>
+                    </Grid>
+                    <Grid>
+                        <IconButton onClick={likeClick} aria-label="reaction">
+                            {/* <ReactionButton/> */}
+                        </IconButton>
+                    </Grid>
+                </Grid>
+=======
         <Grid>
           <IconButton onClick={savedClick} aria-label="bookmark">
             <BookmarkBorderOutlinedIcon></BookmarkBorderOutlinedIcon>
@@ -90,5 +108,6 @@ const FeedPostFooter: FC<IFeedPostFooter> = ({
     </Container>
   );
 };
+>>>>>>> 41f452fadb9d9c61c333af31599d97a931a3f484
 
 export default FeedPostFooter;
