@@ -35,7 +35,8 @@ const useLoginStyle = makeStyles()((theme) => ({
         justifyContent: "center"
     },
     error: {
-        color: "red"
+        color: "red",
+        textAlign: "center"
     }
 }
 ));

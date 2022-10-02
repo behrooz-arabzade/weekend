@@ -37,8 +37,8 @@ const Login: FC<ILogin> = ({
   };
 
   const submitHandler = () => {
-    // TODO Handle Login api here
     setLoading(true)
+    // TODO Handle Login api here
   };
 
   const registerHandler = () => {

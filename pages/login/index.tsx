@@ -22,6 +22,7 @@ const LoginPage: NextPage = () => {
   }
 
   useEffect(() => {
+    router.prefetch("/feed")
     router.prefetch("/register")
     router.prefetch("/forget-password")
   }, [])
