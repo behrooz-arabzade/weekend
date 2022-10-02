@@ -1,6 +1,7 @@
 import Login from "components/molecules/Login/Login";
 import type { NextPage } from "next";
 import { useRouter } from "next/router";
+import { useEffect } from "react";
 import useLoginStyle from "./useStyle";
 
 const LoginPage: NextPage = () => {
@@ -18,6 +19,18 @@ const LoginPage: NextPage = () => {
 
   const handleForgetPasswordClicked = () => {
     router.push("/forget-password")
+  }
+
+  useEffect(() => {
+    router.prefetch("/register")
+    router.prefetch("/forget-password")
+  }, [])
+
+  const authorized = Boolean(localStorage.getItem("token"))
+
+  if (authorized) {
+    router.push("/feed")
+    return null;
   }
 
   return (
