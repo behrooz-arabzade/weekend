@@ -23,7 +23,14 @@ const useUserProfileDetails = makeStyles()((theme) => ({
         boxShadow: "24",
         padding: "10px",
     },
-
+    Avatar:{
+        width: 70, 
+        height: 70,
+    },
+    requestFriend:{
+        width: 200, 
+        padding: 1, 
+    },
     selected:{
         width: "100vw",
         borderRadius: "0 !important",
