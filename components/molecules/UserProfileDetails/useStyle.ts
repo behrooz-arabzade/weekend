@@ -1,6 +1,9 @@
 import { makeStyles } from "tss-react/mui";
 
 const useUserProfileDetails = makeStyles()((theme) => ({
+    container: {
+        width: "100%"
+    },
     logoColor: {
         color: theme.palette.baseColor,
     },
@@ -23,19 +26,19 @@ const useUserProfileDetails = makeStyles()((theme) => ({
         boxShadow: "24",
         padding: "10px",
     },
-    Avatar:{
-        width: 70, 
+    Avatar: {
+        width: 70,
         height: 70,
     },
-    requestFriend:{
-        width: 200, 
-        padding: 1, 
+    requestFriend: {
+        width: 200,
+        padding: 1,
     },
-    selected:{
+    selected: {
         width: "100vw",
         borderRadius: "0 !important",
         marginTop: "15px",
-},
-    
+    },
+
 }));
 export default useUserProfileDetails;
