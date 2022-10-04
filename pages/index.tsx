@@ -1,5 +1,4 @@
 import type { NextPage } from "next";
-
 // Components
 import MainNavigation from "components/molecules/MainNavigation/MainNavigation";
 import HomeIcon from "components/molecules/MainNavigation/HomeIcon";
@@ -15,8 +14,6 @@ import UnLike from "components/molecules/ReactionButton/UnLike";
 import Idea from "components/molecules/ReactionButton/Idea";
 import UserProfileDetails from 'components/molecules/UserProfileDetails/UserProfileDetails';
 
-
-
 //Icons
 import Head from "next/head";
 import Image from "next/image";
@@ -26,12 +23,7 @@ import styles from "../styles/Home.module.css";
 import { Container } from "@mui/system";
 import { Grid } from "@mui/material";
 
-
-
-
-
 const Home: NextPage = () => {
-
    const UserInfo = {
     picSrc: "Images/Aryan.jpg",
     username: "Aryan_Salemabadi",
@@ -82,4 +74,5 @@ const Home: NextPage = () => {
     </div>
   );
 };
+
 export default Home;
