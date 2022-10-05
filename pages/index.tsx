@@ -25,6 +25,7 @@ import Image from "next/image";
 import styles from "../styles/Home.module.css";
 import { Container } from "@mui/system";
 import { Grid } from "@mui/material";
+import UserProfileEditForm from "components/molecules/UserProfileEditForm/UserProfileEditForm";
 
 
 
@@ -32,53 +33,39 @@ import { Grid } from "@mui/material";
 
 const Home: NextPage = () => {
 
-   const UserInfo = {
+  const UserInfoEdit = {
     picSrc: "Images/Aryan.jpg",
     username: "Aryan_Salemabadi",
     firstname: "Aryan",
+    email:"aryanavatar1380@fmail.com",
     lastname: "Salemabadi",
     country: "Iran",
     city: "Tehran",
-    friendCount: 86,
-    postTagedCount: 25,
     contactInfo: {
-     mobile: "09215531809",
-     address: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua",
+      mobile: "09215531809",
+      address: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua",
     },
-   }
+  }
 
   return (
     <div className={styles.container}>
-        <Grid
-          height="100vh"
-          display="flex"
-          justifyContent="center"
-          alignItems="flex-start"
-          mt={2}
-        >
-          <UserProfileDetails
-          
-
-           
-           onFriendRequestClicked={()=>{
-
-            alert("send  Request Friend")
-
-           }}
-
-           onBlockClicked={()=>{
-            alert("user blocked")
-           }}
-
-           onFriendsClicked={()=>{
-            alert("friends list page")
-          }}
+      <Grid
+        height="100vh"
+        display="flex"
+        justifyContent="center"
+        alignItems="flex-start"
+        mt={2}
+      >
+        <UserProfileEditForm
         
+        currentUserInfo = {UserInfoEdit}
 
-          UserInfo={UserInfo}
-
-          />
-        </Grid>
+        onSaveClicked={(data) => {
+        console.log("set edit" , data)
+        }}
+        
+        />
+      </Grid>
     </div>
   );
 };
