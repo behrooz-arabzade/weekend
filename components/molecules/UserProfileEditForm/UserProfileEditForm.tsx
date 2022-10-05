@@ -1,253 +1,240 @@
-import React, { useEffect, useState, FC } from 'react'
-import { Card, Grid, Typography, Container, Avatar, TextField, Button } from '@mui/material';
-
-
+import React, { useEffect, useState, FC } from "react";
+import {
+  Card,
+  Grid,
+  Typography,
+  Container,
+  Avatar,
+  TextField,
+  Button,
+} from "@mui/material";
 
 //CSS(Style Sheet)
-import useUserProfileEditForm from './useStyle';
-
-
+import useUserProfileEditForm from "./useStyle";
+import IUser from "interfaces/user";
 
 interface IUserProfileEditForm {
-    currentUserInfo: {
-        picSrc: string;
-        username: string;
-        firstname: string;
-        lastname: string;
-        email: string;
-        country: string;
-        city: string;
-        contactInfo: {
-            mobile: string;
-            address: string;
-        };
-    };
-    onSaveClicked: (data: string) => void;
+  currentUserInfo: IUser;
 }
 
+const UserProfileEditForm: FC<IUserProfileEditForm> = ({ currentUserInfo }) => {
+  const { classes, cx } = useUserProfileEditForm();
 
+  const [data, setData] = useState(currentUserInfo);
+  const [verificationCode, setVerificationCode] = useState("");
+  const [loading, setLoading] = useState(false);
 
-const UserProfileEditForm: FC<IUserProfileEditForm> = ({
-    currentUserInfo,
-    onSaveClicked,
-}) => {
+  const [imageUrl, setImageUrl] = useState<null>(null);
 
-    const { classes, cx } = useUserProfileEditForm();
+  const [variCode, setVariCode] = useState<boolean>(false);
 
-    const [data, setData] = useState({
-        PicSrc: currentUserInfo.picSrc,
-        user: currentUserInfo.username,
-        firstName: currentUserInfo.firstname,
-        lastName: currentUserInfo.lastname,
-        email: currentUserInfo.email,
-        phone: currentUserInfo.contactInfo.mobile,
-        verificationCode: "",
-        country: currentUserInfo.country,
-        city: currentUserInfo.city,
-        address: currentUserInfo.contactInfo.address,
-    });
+  const changeHandler = (e: any) => {
+    setData({ ...data, [e.target.name]: e.target.value });
+  };
 
-    const [selectedImage, setSelectedImage] = useState<null>(null);
+  const handleVerificationCodeChange = (e: any) => {
+    setVerificationCode(e.target.value);
+  };
 
-    const [imageUrl, setImageUrl] = useState<null>(null);
+  const handleVerificationCodeEnter = () => {
+    setLoading(true);
+    // Handle verificationCode send to api here
+  };
 
-    const [variCode, setVariCode] = useState<boolean>(false)
+  const handleSaveClick = () => {
+    setLoading(true);
+    // TODO call api here
+    // onSaveClicked(data);
+  };
 
-    useEffect(() => {
-        if (selectedImage) {
-            setImageUrl(URL.createObjectURL(selectedImage));
-        }
-    }, [selectedImage]);
+  const uploadImage = (e: any) => {
+    setLoading(true);
+    // TODO upload image with api
+    // setSelectedImage(e.target.files[0]);
+  };
 
-    const cheangeHandler = (e: any) => {
-        setData({ ...data, [e.target.name]: e.target.value });
-    };
+  const variCodeClick = () => {
+    setVariCode(true);
+  };
 
-    const saveClick = () => {
-        onSaveClicked(data);
-    }
-
-    const uploadImage = (e: any) => {
-        setSelectedImage(e.target.files[0])
-    }
-
-    const variCodeClick = () => {
-        setVariCode(true);
-    }
-
-    const emailVari = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(data.email)
-        ?
-        true
-        :
-        false;
-
-    const phoneVari = /^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/.test(data.phone)
-        ?
-        true
-        :
-        false;
-
-    return (
-        <Card className={cx(classes.root)}>
-            <Container>
-                <Grid p={2}>
-                    <Typography fontWeight="bold">
-                        Edit Profile
-                    </Typography>
-                </Grid>
-                <Grid
-                    display="flex"
-                    justifyContent="center"
-                >
-                    <Avatar
-                        src={data.PicSrc}
-                        className={cx(classes.Avatar)}
-                    />
-                </Grid>
-                <Grid
-                    display="flex"
-                    justifyContent="center"
-                    mt={2}
-                >
-                    <Button color="inherit" component="label">
-                        <Typography fontWeight="bold">
-                            Edit Image
-                        </Typography>
-                        <input
-                            hidden
-                            accept="image/*"
-                            multiple
-                            type="file"
-                            onChange={uploadImage}
-                        />
-                    </Button>
-                </Grid>
-                <Grid my={5} mx={1}>
-                    <TextField
-                        disabled
-                        name="user"
-                        onChange={cheangeHandler}
-                        value={data.user}
-                        fullWidth
-                        variant="outlined"
-                        label="userName"
-                    />
-                </Grid>
-                <Grid my={5} mx={1}>
-                    <TextField
-                        name="firstName"
-                        onChange={cheangeHandler}
-                        value={data.firstName}
-                        fullWidth
-                        variant="outlined"
-                        label="First Name"
-                    />
-                </Grid>
-                <Grid my={5} mx={1}>
-                    <TextField
-                        name="lastName"
-                        onChange={cheangeHandler}
-                        value={data.lastName}
-                        fullWidth
-                        variant="outlined"
-                        label="Last Name"
-                    />
-                </Grid>
-                <Grid my={4} mx={1}>
-                    <TextField
-                        name="email"
-                        onChange={cheangeHandler}
-                        value={data.email}
-                        fullWidth
-                        variant="outlined"
-                        label="Email"
-                    />
-                </Grid>
-                <Grid my={4} mx={1}>
-                    <TextField
-                        name="phone"
-                        onChange={cheangeHandler}
-                        value={data.phone}
-                        fullWidth
-                        variant="outlined"
-                        label="Phone"
-                    />
-                </Grid>
-                <Grid>
-                    {
-                        <Grid display={variCode ? "none" : "block"}>
-                            <Button fullWidth onClick={variCodeClick} disabled={!emailVari && !phoneVari}>
-                                <Typography fontWeight="bold" textAlign="center">
-                                    Send Code
-                                </Typography>
-                            </Button>
-                        </Grid>
-                    }
-                </Grid>
-                <Grid
-                    display={variCode ? "flex" : "none"}
-                    justifyContemt="space-between"
-                    alignItems="center"
-                >
-                    <TextField
-                        name="verificationCode"
-                        onChange={cheangeHandler}
-                        value={data.verificationCode}
-                        variant="outlined"
-                        label="verificationCode"
-                    />
-                    <Button sx={{ margin: "5px" }}>
-                        <Typography
-                            fontSize={13}
-                            fontWeight="bold"
-                        >
-                            Enter Code
-                        </Typography>
-                    </Button>
-                </Grid>
-                <Grid my={4} mx={1}>
-                    <TextField
-                        name="country"
-                        onChange={cheangeHandler}
-                        value={data.country}
-                        fullWidth
-                        variant="outlined"
-                        label="Country"
-                    />
-                </Grid>
-                <Grid my={5} mx={1}>
-                    <TextField
-                        name="city"
-                        onChange={cheangeHandler}
-                        value={data.city}
-                        fullWidth
-                        variant="outlined"
-                        label="City"
-                    />
-                </Grid>
-                <Grid my={5} mx={1}>
-                    <TextField
-                        name="address"
-                        onChange={cheangeHandler}
-                        value={data.address}
-                        fullWidth
-                        variant="outlined"
-                        label="Address"
-                        multiline={true}
-                        rows={5}
-                    />
-                </Grid>
-                <Grid>
-                    <Button fullWidth onClick={saveClick} disabled={!emailVari && !phoneVari}>
-                        <Typography fontWeight="bold" textAlign="center">
-                            Edit
-                        </Typography>
-                    </Button>
-                </Grid>
-            </Container>
-
-        </Card>
+  const emailVari =
+    /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(
+      data.email
     )
-}
+      ? true
+      : false;
+
+  const phoneVari = /^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/.test(
+    data.contactInfo.mobile
+  )
+    ? true
+    : false;
+
+  return (
+    <Card className={cx(classes.root)}>
+      <Container>
+        <Grid p={2}>
+          <Typography fontWeight="bold">Edit Profile</Typography>
+        </Grid>
+        <Grid display="flex" justifyContent="center">
+          <Avatar src={data.picSrc} className={cx(classes.Avatar)} />
+        </Grid>
+        <Grid display="flex" justifyContent="center" mt={2}>
+          <Button color="inherit" component="label" disabled={loading}>
+            <Typography fontWeight="bold">Edit Image</Typography>
+            <input
+              hidden
+              accept="image/*"
+              multiple
+              type="file"
+              onChange={uploadImage}
+            />
+          </Button>
+        </Grid>
+        <Grid my={5} mx={1}>
+          <TextField
+            disabled
+            name="user"
+            onChange={changeHandler}
+            value={data.username}
+            fullWidth
+            variant="outlined"
+            label="userName"
+          />
+        </Grid>
+        <Grid my={5} mx={1}>
+          <TextField
+            name="firstName"
+            onChange={changeHandler}
+            value={data.firstname}
+            fullWidth
+            variant="outlined"
+            label="First Name"
+            disabled={loading}
+          />
+        </Grid>
+        <Grid my={5} mx={1}>
+          <TextField
+            name="lastName"
+            onChange={changeHandler}
+            value={data.lastname}
+            fullWidth
+            variant="outlined"
+            label="Last Name"
+            disabled={loading}
+          />
+        </Grid>
+        <Grid my={4} mx={1}>
+          <TextField
+            name="email"
+            onChange={changeHandler}
+            value={data.email}
+            fullWidth
+            variant="outlined"
+            label="Email"
+            disabled={loading}
+          />
+        </Grid>
+        <Grid my={4} mx={1}>
+          <TextField
+            name="phone"
+            onChange={changeHandler}
+            value={data.contactInfo.mobile}
+            fullWidth
+            variant="outlined"
+            label="Phone"
+            disabled={loading}
+          />
+        </Grid>
+        <Grid>
+          {
+            <Grid display={variCode ? "none" : "block"}>
+              <Button
+                fullWidth
+                onClick={variCodeClick}
+                disabled={(!emailVari && !phoneVari) || loading}
+              >
+                <Typography fontWeight="bold" textAlign="center">
+                  Send Code
+                </Typography>
+              </Button>
+            </Grid>
+          }
+        </Grid>
+        <Grid
+          style={{
+            display: variCode ? "flex" : "none",
+            justifyContent: "space-between",
+            alignItems: "center",
+          }}
+        >
+          <TextField
+            name="verificationCode"
+            onChange={handleVerificationCodeChange}
+            value={verificationCode}
+            variant="outlined"
+            label="verificationCode"
+            disabled={loading}
+          />
+          <Button
+            sx={{ margin: "5px" }}
+            onClick={handleVerificationCodeEnter}
+            disabled={loading}
+          >
+            <Typography fontSize={13} fontWeight="bold">
+              Enter Code
+            </Typography>
+          </Button>
+        </Grid>
+        <Grid my={4} mx={1}>
+          <TextField
+            name="country"
+            onChange={changeHandler}
+            value={data.country}
+            fullWidth
+            variant="outlined"
+            label="Country"
+            disabled={loading}
+          />
+        </Grid>
+        <Grid my={5} mx={1}>
+          <TextField
+            name="city"
+            onChange={changeHandler}
+            value={data.city}
+            fullWidth
+            variant="outlined"
+            label="City"
+            disabled={loading}
+          />
+        </Grid>
+        <Grid my={5} mx={1}>
+          <TextField
+            name="address"
+            onChange={changeHandler}
+            value={data.contactInfo.address}
+            fullWidth
+            variant="outlined"
+            label="Address"
+            multiline={true}
+            rows={5}
+            disabled={loading}
+          />
+        </Grid>
+        <Grid>
+          <Button
+            fullWidth
+            onClick={handleSaveClick}
+            disabled={(!emailVari && !phoneVari) || loading}
+          >
+            <Typography fontWeight="bold" textAlign="center">
+              Edit
+            </Typography>
+          </Button>
+        </Grid>
+      </Container>
+    </Card>
+  );
+};
 
 export default UserProfileEditForm;
