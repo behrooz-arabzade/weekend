@@ -51,6 +51,8 @@ const UserProfileEditForm: FC<IUserProfileEditForm> = ({
 
     const [imageUrl, setImageUrl] = useState<null>(null);
 
+    const [variCode, setVariCode] = useState<boolean>(false)
+
     useEffect(() => {
         if (selectedImage) {
             setImageUrl(URL.createObjectURL(selectedImage));
@@ -65,21 +67,25 @@ const UserProfileEditForm: FC<IUserProfileEditForm> = ({
         onSaveClicked(data);
     }
 
-    const uploadImage = (e:any) => {
+    const uploadImage = (e: any) => {
         setSelectedImage(e.target.files[0])
     }
 
-    const emailVari =  /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(data.email) 
-    ?
-    true
-    :
-    false;
+    const variCodeClick = () => {
+        setVariCode(true);
+    }
+
+    const emailVari = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(data.email)
+        ?
+        true
+        :
+        false;
 
     const phoneVari = /^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/.test(data.phone)
-    ?
-    true
-    :
-    false;
+        ?
+        true
+        :
+        false;
 
     return (
         <Card className={cx(classes.root)}>
@@ -147,7 +153,7 @@ const UserProfileEditForm: FC<IUserProfileEditForm> = ({
                         label="Last Name"
                     />
                 </Grid>
-                <Grid my={5} mx={1}>
+                <Grid my={4} mx={1}>
                     <TextField
                         name="email"
                         onChange={cheangeHandler}
@@ -157,7 +163,7 @@ const UserProfileEditForm: FC<IUserProfileEditForm> = ({
                         label="Email"
                     />
                 </Grid>
-                <Grid my={5} mx={1}>
+                <Grid my={4} mx={1}>
                     <TextField
                         name="phone"
                         onChange={cheangeHandler}
@@ -167,8 +173,19 @@ const UserProfileEditForm: FC<IUserProfileEditForm> = ({
                         label="Phone"
                     />
                 </Grid>
+                <Grid>
+                    {
+                        <Grid display={variCode ? "none" : "block"}>
+                            <Button fullWidth onClick={variCodeClick} disabled={!emailVari && !phoneVari}>
+                                <Typography fontWeight="bold" textAlign="center">
+                                    Send Code
+                                </Typography>
+                            </Button>
+                        </Grid>
+                    }
+                </Grid>
                 <Grid
-                    display="flex"
+                    display={variCode ? "flex" : "none"}
                     justifyContemt="space-between"
                     alignItems="center"
                 >
@@ -188,7 +205,7 @@ const UserProfileEditForm: FC<IUserProfileEditForm> = ({
                         </Typography>
                     </Button>
                 </Grid>
-                <Grid my={5} mx={1}>
+                <Grid my={4} mx={1}>
                     <TextField
                         name="country"
                         onChange={cheangeHandler}
