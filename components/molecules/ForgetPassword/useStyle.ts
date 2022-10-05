@@ -3,7 +3,8 @@ import { makeStyles } from "tss-react/mui";
 const useForgetPassword = makeStyles()((theme) => ({
     root: {
         padding: 10,
-        width: "300px",
+        width: "100%",
+        maxWidth: 450
     },
     spanLogo: {
         color: theme.palette.baseColor,
@@ -21,13 +22,13 @@ const useForgetPassword = makeStyles()((theme) => ({
         borderRadius: "5px",
         background: "#3F50B5",
     },
-    forgetButtonOff:{
+    forgetButtonOff: {
         display: "flex",
         justifyContent: "center",
         margin: "5px 0px",
         borderRadius: "5px",
         background: "#3F50B5",
-        opacity:0.5,
+        opacity: 0.5,
     },
     ButtonOn: {
         color: "#fff !important",
@@ -45,6 +46,10 @@ const useForgetPassword = makeStyles()((theme) => ({
     registerButton: {
         display: "flex",
         justifyContent: "center"
+    },
+    error: {
+        color: "red",
+        textAlign: "center"
     }
 }
 ));
