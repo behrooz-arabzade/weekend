@@ -1,12 +1,17 @@
 import React, { FC, useState, MouseEvent } from 'react'
-import { Button, Typography, Popover, TextField, Grid } from '@mui/material';
+import { Button, Typography, Popover, TextField, Grid, Modal, Box } from '@mui/material';
+
+
+
+//Css(Style Sheet)
+import useReport from './useStyle';
 
 
 
 
 //InterFaces
 interface IReport {
-    open?: boolean;
+    open: boolean;
     onClose: () => void;
 }
 
@@ -16,88 +21,117 @@ const Report: FC<IReport> = ({
     onClose
 }) => {
 
-    const [anchorEl, setAnchorEl] = useState<HTMLButtonElement | boolean | null>(open);
+    const { classes, cx } = useReport();
 
-    const [data, setData] = useState({
-        subject: "",
-        description: "",
-    });
+    const [openModal, setOpenModal] = useState(open);
 
-    const cheangeHandler = (e: any) => {
-        setData({ ...data, [e.target.name]: e.target.value });
-    };
-
-    const handleClick = (event: MouseEvent<HTMLButtonElement>) => {
-        setAnchorEl(event.currentTarget);
-    };
+    const handleOpen = () => setOpenModal(true);
 
     const handleClose = () => {
-        setAnchorEl(false);
+
+        setOpenModal(false);
+
         onClose();
+
     };
 
-    const sendHandler = () => {
-        console.log(data)
+    const [subject, setSubject] = useState<string>("");
+
+    const [description, setDescription] = useState<string>("");
+
+
+
+    const subjectHandler = (e: any) => {
+
+        setSubject(e.target.value)
+
     }
 
-    const openPop = Boolean(anchorEl);
-    
-    const id = openPop ? 'simple-popover' : undefined;
+    const descriptionHandler = (e: any) => {
+
+        setDescription(e.target.value)
+
+    }
+
+    const sendHandler = () => {
+
+        console.log(`send your report, subject: ${subject} and description: ${description}`)
+
+        alert(`send your report, subject: ${subject} and description: ${description}`)
+
+    }
+
 
     return (
         <div>
-            <Button color="inherit" aria-describedby={id} variant="contained" onClick={handleClick}>
-                Report
-            </Button>
-            <Popover
-                id={id}
-                open={openPop}
-                anchorEl={anchorEl}
-                onClose={handleClose}
-                anchorOrigin={{
-                    vertical: 'bottom',
-                    horizontal: 'left',
-                }}
-                sx={{ width: "300px" }}
+            <Button
+                onClick={handleOpen}
+                color="inherit"
             >
-                <Grid>
-                    <TextField
-                        sx={{ m: 4, width: "200px" }}
-                        id="outlined-textarea"
-                        label="Subject"
-                        onChange={cheangeHandler}
-                        name="subject"
-                        value={data.subject}
-                        multiline
-                    />
-                    <TextField
-                        sx={{ m: 4 }}
-                        id="outlined-multiline-static"
-                        label="Description"
-                        onChange={cheangeHandler}
-                        multiline
-                        name="description"
-                        value={data.description}
-                        rows={6}
-                    />
-                </Grid>
-                <Grid 
-                display="flex" 
-                justifyContent="center" 
-                alignItems="center"
-                >
-                    <Button 
-                    onClick={sendHandler} 
-                    sx={{ width: "100%" }} 
-                    color="inherit"
-                    disabled={(data.subject === "" || data.description === "") ? true : false }
+                <Typography fontWeight="bold">
+                    Report
+                </Typography>
+            </Button>
+            <Modal
+                open={openModal}
+                onClose={handleClose}
+                aria-labelledby="modal-modal-title"
+                aria-describedby="modal-modal-description"
+            >
+                <Box className={cx(classes.modalGroup)}>
+                    <Grid
+                        display="flex"
+                        justifyContent="center"
                     >
-                        <Typography fontWeight="bold">
-                            Send
-                        </Typography>
-                    </Button>
-                </Grid>
-            </Popover>
+                        <TextField
+                            sx={{ m: 4, width: "200px" }}
+                            id="outlined-textarea"
+                            label="Subject"
+                            onChange={subjectHandler}
+                            name="subject"
+                            value={subject}
+                            multiline
+                        />
+                    </Grid>
+                    <Grid
+                        display="flex"
+                        justifyContent="center"
+                    >
+                        <TextField
+                            sx={{ m: 4 }}
+                            id="outlined-multiline-static"
+                            label="Description"
+                            onChange={descriptionHandler}
+                            multiline
+                            name="description"
+                            value={description}
+                            rows={6}
+                        />
+                    </Grid>
+                    <Grid
+                        display="flex"
+                        justifyContent="center"
+                        alignItems="center"
+                    >
+                        <Button
+
+                            sx={{ width: "100%" }}
+                            color="inherit"
+                            disabled=
+                            {
+                                (subject === "" || description === "")
+                                    ? true
+                                    : false
+                            }
+                            onClick={sendHandler}
+                        >
+                            <Typography fontWeight="bold">
+                                Send
+                            </Typography>
+                        </Button>
+                    </Grid>
+                </Box>
+            </Modal>
         </div>
     )
 }
