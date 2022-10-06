@@ -13,7 +13,8 @@ import ReactionButton from "components/molecules/ReactionButton/ReactionButton";
 import Like from "components/molecules/ReactionButton/Like";
 import UnLike from "components/molecules/ReactionButton/UnLike";
 import Idea from "components/molecules/ReactionButton/Idea";
-
+import WeekDayEdit from "components/molecules/WeekDayItem/WeekDayEdit";
+import WeekDayItem from 'components/molecules/WeekDayItem/WeekDayItem';
 
 
 //Icons
@@ -25,29 +26,36 @@ import styles from "../styles/Home.module.css";
 import { Container } from "@mui/system";
 import { Grid } from "@mui/material";
 
+
 const Home: NextPage = () => {
   return (
     <div className={styles.container}>
       <Container>
-    <Grid 
-    height="100vh"
-     display="flex"
-      justifyContent="center"
-       alignItems="center"
-       >
-        <FeedPostFooter 
-          reactionCount={10}
-          currentReactionId = {3}
-          onSaveClicked={()=>{
-            console.log("post saved")
-          }}
-          onCommentsClicked={()=>{
-            console.log("comment")
-          }}
 
+        <WeekDayItem
+          startHour="0o5"
+          startMinute = "12"
+          endHour = "14"
+          endMinute = "30"
+          timeName="Game Party"
+          day= "sun"
         />
-    </Grid>
-    </Container>
+
+        <Grid
+          height="100vh"
+          display="flex"
+          justifyContent="center"
+          pt={5}
+        >
+
+          <WeekDayEdit
+          onChange={(startHour, startMinute , endHour , endMinute , day,timeName)=>{
+            console.log(`your Free Time is ${startHour} : ${startMinute} to ${endHour} : ${endMinute} on ${day} and your TimeName is ${timeName} `)
+          }}
+          />
+        </Grid>
+
+      </Container>
     </div>
   );
 };
