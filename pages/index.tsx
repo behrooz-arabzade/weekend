@@ -31,6 +31,7 @@ const Home: NextPage = () => {
   const event = {
 
     subject : "pool",
+    image : "Images/pool.jpg",
     TimeEvent : "2022/11/12 - 2022/11/15",
     time : "19 - 21",
     creator : "@Aryan_Salemabadi",

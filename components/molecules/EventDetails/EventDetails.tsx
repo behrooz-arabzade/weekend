@@ -1,5 +1,5 @@
 import React, { FC } from "react";
-import { Button, Card, Grid, Typography, Avatar } from '@mui/material';
+import { Button, Card, Grid, Typography, Avatar, CardMedia } from '@mui/material';
 
 
 
@@ -28,6 +28,7 @@ import useEventDetails from "./useStyle";
 interface IEventDetails {
     event: {
         subject: string;
+        image: string;
         TimeEvent: string;
         time: string;
         creator: string;
@@ -58,6 +59,11 @@ const EventDetails: FC<IEventDetails> = ({
 
 
             <Card sx={{ width: "300px" }}>
+            <CardMedia
+             component="img"
+             height="140"
+             image={event.image}
+                />
                 <Grid p={4}>
                     <Grid>
                         <Typography fontWeight="bold">
