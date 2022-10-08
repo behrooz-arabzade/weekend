@@ -1,5 +1,4 @@
 import type { NextPage } from "next";
-
 // Components
 import MainNavigation from "components/molecules/MainNavigation/MainNavigation";
 import HomeIcon from "components/molecules/MainNavigation/HomeIcon";
@@ -15,21 +14,16 @@ import UnLike from "components/molecules/ReactionButton/UnLike";
 import Idea from "components/molecules/ReactionButton/Idea";
 import Report from "components/molecules/Report/Report";
 
-
 //Icons
-import Head from "next/head";
-import Image from "next/image";
 
 //Css(Style Sheet)
 import styles from "../styles/Home.module.css";
 import { Container } from "@mui/system";
 import { Grid } from "@mui/material";
+import UserProfileEditForm from "components/molecules/UserProfileEditForm/UserProfileEditForm";
 
 
 const Home: NextPage = () => {
-
-  
-
   return (
     <div className={styles.container}>
       <Container>
@@ -50,4 +44,5 @@ const Home: NextPage = () => {
     </div>
   );
 };
+
 export default Home;
