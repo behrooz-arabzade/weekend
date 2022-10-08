@@ -1,139 +1,92 @@
-import React, { FC, useState, MouseEvent } from 'react'
-import { Button, Typography, Popover, TextField, Grid, Modal, Box } from '@mui/material';
-
-
+import React, { FC, useState, MouseEvent } from "react";
+import { Button, Typography, TextField, Grid, Modal, Box } from "@mui/material";
 
 //Css(Style Sheet)
-import useReport from './useStyle';
-
-
-
+import useReport from "./useStyle";
 
 //InterFaces
 interface IReport {
-    open: boolean;
-    onClose: () => void;
+  open: boolean;
+  onClose: () => void;
 }
 
+const Report: FC<IReport> = ({ open, onClose }) => {
+  const { classes, cx } = useReport();
 
-const Report: FC<IReport> = ({
-    open,
-    onClose
-}) => {
+  const [openModal, setOpenModal] = useState(open);
 
-    const { classes, cx } = useReport();
+  const handleOpen = () => setOpenModal(true);
 
-    const [openModal, setOpenModal] = useState(open);
+  const handleClose = () => {
+    setOpenModal(false);
+    onClose();
+  };
 
-    const handleOpen = () => setOpenModal(true);
+  const [subject, setSubject] = useState<string>("");
 
-    const handleClose = () => {
+  const [description, setDescription] = useState<string>("");
 
-        setOpenModal(false);
+  const subjectHandler = (e: any) => {
+    setSubject(e.target.value);
+  };
 
-        onClose();
+  const descriptionHandler = (e: any) => {
+    setDescription(e.target.value);
+  };
 
-    };
+  const sendHandler = () => {
+    // TODO call api here
+  };
 
-    const [subject, setSubject] = useState<string>("");
-
-    const [description, setDescription] = useState<string>("");
-
-
-
-    const subjectHandler = (e: any) => {
-
-        setSubject(e.target.value)
-
-    }
-
-    const descriptionHandler = (e: any) => {
-
-        setDescription(e.target.value)
-
-    }
-
-    const sendHandler = () => {
-
-        console.log(`send your report, subject: ${subject} and description: ${description}`)
-
-        alert(`send your report, subject: ${subject} and description: ${description}`)
-
-    }
-
-
-    return (
-        <div>
+  return (
+    <div>
+      <Button onClick={handleOpen} color="inherit">
+        <Typography fontWeight="bold">Report</Typography>
+      </Button>
+      <Modal
+        open={openModal}
+        onClose={handleClose}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <Box className={cx(classes.modalGroup)}>
+          <Grid display="flex" justifyContent="center">
+            <TextField
+              sx={{ m: 4, width: "200px" }}
+              id="outlined-textarea"
+              label="Subject"
+              onChange={subjectHandler}
+              name="subject"
+              value={subject}
+              multiline
+            />
+          </Grid>
+          <Grid display="flex" justifyContent="center">
+            <TextField
+              sx={{ m: 4 }}
+              id="outlined-multiline-static"
+              label="Description"
+              onChange={descriptionHandler}
+              multiline
+              name="description"
+              value={description}
+              rows={6}
+            />
+          </Grid>
+          <Grid display="flex" justifyContent="center" alignItems="center">
             <Button
-                onClick={handleOpen}
-                color="inherit"
+              sx={{ width: "100%" }}
+              color="inherit"
+              disabled={subject === "" || description === "" ? true : false}
+              onClick={sendHandler}
             >
-                <Typography fontWeight="bold">
-                    Report
-                </Typography>
+              <Typography fontWeight="bold">Send</Typography>
             </Button>
-            <Modal
-                open={openModal}
-                onClose={handleClose}
-                aria-labelledby="modal-modal-title"
-                aria-describedby="modal-modal-description"
-            >
-                <Box className={cx(classes.modalGroup)}>
-                    <Grid
-                        display="flex"
-                        justifyContent="center"
-                    >
-                        <TextField
-                            sx={{ m: 4, width: "200px" }}
-                            id="outlined-textarea"
-                            label="Subject"
-                            onChange={subjectHandler}
-                            name="subject"
-                            value={subject}
-                            multiline
-                        />
-                    </Grid>
-                    <Grid
-                        display="flex"
-                        justifyContent="center"
-                    >
-                        <TextField
-                            sx={{ m: 4 }}
-                            id="outlined-multiline-static"
-                            label="Description"
-                            onChange={descriptionHandler}
-                            multiline
-                            name="description"
-                            value={description}
-                            rows={6}
-                        />
-                    </Grid>
-                    <Grid
-                        display="flex"
-                        justifyContent="center"
-                        alignItems="center"
-                    >
-                        <Button
-
-                            sx={{ width: "100%" }}
-                            color="inherit"
-                            disabled=
-                            {
-                                (subject === "" || description === "")
-                                    ? true
-                                    : false
-                            }
-                            onClick={sendHandler}
-                        >
-                            <Typography fontWeight="bold">
-                                Send
-                            </Typography>
-                        </Button>
-                    </Grid>
-                </Box>
-            </Modal>
-        </div>
-    )
-}
+          </Grid>
+        </Box>
+      </Modal>
+    </div>
+  );
+};
 
 export default Report;
