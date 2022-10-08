@@ -6,7 +6,7 @@ import useRegisterStyle from "./useStyle";
 
 //InterFaces
 interface IRegister {
-  onSubmitClicked: (username: string, password: string) => void;
+  onRegisterCompleted: (username: string) => void;
   onLoginClicked: () => void;
 }
 
@@ -16,43 +16,51 @@ interface IDataRegister {
   confrimPassword: string;
 }
 
-const Register: FC<IRegister> = ({ onSubmitClicked, onLoginClicked }) => {
+const Register: FC<IRegister> = ({ onRegisterCompleted, onLoginClicked }) => {
   const { classes, cx } = useRegisterStyle();
 
-  const [dataRegister, setDataRegister] = useState<IDataRegister>({
-    user: "",
-    password: "",
-    confrimPassword: "",
-  });
+  const [user, setUser] = useState("")
+  const [password, setPassword] = useState("")
+  const [confirmPassword, setConfirmPassword] = useState("")
+  const [loading, setLoading] = useState<Boolean>(false);
+  const [error, setError] = useState<string>("");
 
-  const cheangeHandler = (e: any) => {
-    setDataRegister({ ...dataRegister, [e.target.name]: e.target.value });
+  const onChangeUser = (e: any) => {
+    setUser(e.target.value)
+  }
+  const onChangePassword = (e: any) => {
+    setPassword(e.target.value)
+  }
+  const onChangeConfirmPassword = (e: any) => {
+    setConfirmPassword(e.target.value)
+  }
+
+  const handleSubmit = () => {
+    setLoading(true)
+    // TODO handle register api here
   };
 
-  const clickHandler = () => {
-    onSubmitClicked(dataRegister.user, dataRegister.password);
-  };
   const loginClickHandler = () => {
     onLoginClicked();
   };
 
   const resultVarPassword =
-    dataRegister.password.length >= 8 &&
-    /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[A-Za-z\d#$@!%&*?]{8,30}$/.test(
-      dataRegister.password
-    )
+    password.length >= 8 &&
+      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[A-Za-z\d#$@!%&*?]{8,30}$/.test(
+        password
+      )
       ? true
       : false;
 
-  const resultVarConfrimPassword =
-    dataRegister.password === dataRegister.confrimPassword ? true : false;
+  const resultVarConfrimPassword = password === confirmPassword ? true : false;
 
   const resultUser =
     /^(?:[A-Z\d][A-Z\d_-]{2,30}|[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4})$/i.test(
-      dataRegister.user
+      user
     )
       ? true
       : false;
+
   return (
     <Card className={cx(classes.root)}>
       <Typography className={cx(classes.logo)}>
@@ -62,8 +70,8 @@ const Register: FC<IRegister> = ({ onSubmitClicked, onLoginClicked }) => {
       </Typography>
       <TextField
         name="user"
-        onChange={cheangeHandler}
-        value={dataRegister.user}
+        onChange={onChangeUser}
+        value={user}
         fullWidth
         variant="outlined"
         label="username or email "
@@ -72,8 +80,8 @@ const Register: FC<IRegister> = ({ onSubmitClicked, onLoginClicked }) => {
       <TextField
         className={cx(classes.input)}
         name="password"
-        onChange={cheangeHandler}
-        value={dataRegister.password}
+        onChange={onChangePassword}
+        value={password}
         fullWidth
         type="password"
         variant="outlined"
@@ -83,8 +91,8 @@ const Register: FC<IRegister> = ({ onSubmitClicked, onLoginClicked }) => {
       <TextField
         fullWidth
         type="password"
-        value={dataRegister.confrimPassword}
-        onChange={cheangeHandler}
+        value={confirmPassword}
+        onChange={onChangeConfirmPassword}
         name="confrimPassword"
         label="confrim Password"
         variant="outlined"
@@ -97,9 +105,9 @@ const Register: FC<IRegister> = ({ onSubmitClicked, onLoginClicked }) => {
         )}
       >
         <Button
-          onClick={clickHandler}
+          onClick={handleSubmit}
           disabled={
-            !(resultVarPassword && resultVarConfrimPassword && resultUser)
+            !(resultVarPassword && resultVarConfrimPassword && resultUser) || loading
           }
           className={cx(
             resultVarConfrimPassword && resultVarPassword && resultUser
@@ -110,6 +118,7 @@ const Register: FC<IRegister> = ({ onSubmitClicked, onLoginClicked }) => {
           <Typography>Register</Typography>
         </Button>
       </div>
+      <Typography className={cx(classes.error)}>{error}</Typography>
       <div className={cx(classes.loginButton)}>
         <Button onClick={loginClickHandler} color="inherit">
           <Typography mr={1} color="primary">
