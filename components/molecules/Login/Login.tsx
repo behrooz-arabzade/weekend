@@ -4,16 +4,12 @@ import { Button, Card, TextField, Typography } from "@mui/material";
 
 //CSS(Style Sheets)
 import useLoginStyle from "./useStyle";
+import Api from "services";
 
 interface ILogin {
   onLoginComplete: () => void;
   onRegisterClicked: () => void;
   onForgetPasswordClicked: () => void;
-}
-
-interface IData {
-  user: string;
-  password: string;
 }
 
 const Login: FC<ILogin> = ({
@@ -37,8 +33,19 @@ const Login: FC<ILogin> = ({
   };
 
   const submitHandler = () => {
-    setLoading(true)
-    // TODO Handle Login api here
+    setLoading(true);
+
+    Api.users
+      .login({ username: user, password: password })
+      .then((data) => {
+        setLoading(false);
+        localStorage.setItem("token", data.access_token);
+        onLoginComplete();
+      })
+      .catch((error) => {
+        setLoading(false);
+        setError(error.message);
+      });
   };
 
   const registerHandler = () => {
@@ -80,7 +87,7 @@ const Login: FC<ILogin> = ({
         <Button
           onClick={submitHandler}
           className={cx(classes.colorButton)}
-          disabled={loading}
+          disabled={Boolean(loading)}
         >
           <Typography>Login</Typography>
         </Button>

@@ -1,9 +1,18 @@
 import type { NextPage } from "next";
 // Components
-import ViewType from "components/molecules/ViewType/ViewType";
-import GridIcon from "components/molecules/ViewType/GridIcon";
-import ListViewWithDetail from "components/molecules/ViewType/ListViewWithDetail";
-import ListViewWithoutDetail from "components/molecules/ViewType/ListViewWithoutDetail";
+import MainNavigation from "components/molecules/MainNavigation/MainNavigation";
+import HomeIcon from "components/molecules/MainNavigation/HomeIcon";
+import SearchIcon from "components/molecules/MainNavigation/Search";
+import Create from "components/molecules/MainNavigation/Create";
+import EventActive from "./../components/molecules/MainNavigation/EventActive";
+import MessageIcon from "./../components/molecules/MainNavigation/MessageIcon";
+import FeedPostFooter from "components/molecules/FeedPostFooter/FeedPostFooter";
+import FeedPostHeader from './../components/molecules/FeedPostHeader/FeedPostHeader';
+import ReactionButton from "components/molecules/ReactionButton/ReactionButton";
+import Like from "components/molecules/ReactionButton/Like";
+import UnLike from "components/molecules/ReactionButton/UnLike";
+import Idea from "components/molecules/ReactionButton/Idea";
+import EventDetails from "components/molecules/EventDetails/EventDetails";
 
 //Icons
 
@@ -13,53 +22,64 @@ import { Container } from "@mui/system";
 import { Grid } from "@mui/material";
 import UserProfileEditForm from "components/molecules/UserProfileEditForm/UserProfileEditForm";
 
+
+
 const Home: NextPage = () => {
 
-  const UserInfoEdit = {
-    picSrc: "Images/Aryan.jpg",
-    username: "Aryan_Salemabadi",
-    firstname: "Aryan",
-    email:"aryanavatar1380@fmail.com",
-    lastname: "Salemabadi",
-    country: "Iran",
-    city: "Tehran",
-    contactInfo: {
-      mobile: "09215531809",
-      address: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua",
-    },
-  }
+  const event = {
+
+    subject : "pool",
+    image : "Images/pool.jpg",
+    TimeEvent : "2022/11/12 - 2022/11/15",
+    time : "19 - 21",
+    creator : "@Aryan_Salemabadi",
+    city : "Tehran",
+    maximumMember: "20",
+    dateRegistration : "2022/10/12 - 2022/10/15",
+    timeRegistration : " 00 - 23 " ,
+    address : "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua",
+    description : "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua Egestas purus viverra accumsan in nisl nisi Arcu cursus vitae congue mauris rhoncus aenean vel elit scelerisque"
+
+  };
+
+  const users = [
+    {
+     profile : "Images/Aryan.jpg"
+  },
+    {
+     profile : "Images/Aryan.jpg"
+  },
+    {
+     profile : "Images/Aryan.jpg"
+  },
+    {
+     profile : "Images/Aryan.jpg"
+  },
+    {
+     profile : "Images/Aryan.jpg"
+  },
+    {
+     profile : "Images/Aryan.jpg"
+  },
+]
+
 
   return (
     <div className={styles.container}>
       <Container>
-        <Grid
-          height="100vh"
-          display="flex"
-          justifyContent="center"
-          alignItems="center"
-        >
-          <ViewType
-            items={[
-              {
-                name: "grid",
-                icon: <GridIcon />,
-              },
-              {
-                name: "listview with detail",
-                icon: <ListViewWithDetail />,
-              },
-              {
-                name: "listview without detail",
-                icon: <ListViewWithoutDetail />,
-              },
-            ]}
-            selectedTypeName="grid"
-            onViewTypeClicked={(viewName) => {
-              console.log("click to", viewName);
-            }}
+    <Grid 
+     display="flex"
+      justifyContent="center"
+       alignItems="center"
+       >
+          <EventDetails
+        
+          event={event}
+
+          users = {users}
           />
-        </Grid>
-      </Container>
+    </Grid>
+    </Container>
     </div>
   );
 };

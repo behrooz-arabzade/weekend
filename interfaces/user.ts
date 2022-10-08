@@ -1,4 +1,5 @@
 export default interface IUser {
+  id: string;
   picSrc: string;
   username: string;
   firstname: string;
