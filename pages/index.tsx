@@ -13,7 +13,7 @@ import ReactionButton from "components/molecules/ReactionButton/ReactionButton";
 import Like from "components/molecules/ReactionButton/Like";
 import UnLike from "components/molecules/ReactionButton/UnLike";
 import Idea from "components/molecules/ReactionButton/Idea";
-
+import EventDetails from "components/molecules/EventDetails/EventDetails";
 
 
 //Icons
@@ -25,27 +25,60 @@ import styles from "../styles/Home.module.css";
 import { Container } from "@mui/system";
 import { Grid } from "@mui/material";
 
+
 const Home: NextPage = () => {
+
+  const event = {
+
+    subject : "pool",
+    TimeEvent : "2022/11/12 - 2022/11/15",
+    time : "19 - 21",
+    creator : "@Aryan_Salemabadi",
+    city : "Tehran",
+    maximumMember: "20",
+    dateRegistration : "2022/10/12 - 2022/10/15",
+    timeRegistration : " 00 - 23 " ,
+    address : "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua",
+    description : "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua Egestas purus viverra accumsan in nisl nisi Arcu cursus vitae congue mauris rhoncus aenean vel elit scelerisque"
+
+  };
+
+  const users = [
+    {
+     profile : "Images/Aryan.jpg"
+  },
+    {
+     profile : "Images/Aryan.jpg"
+  },
+    {
+     profile : "Images/Aryan.jpg"
+  },
+    {
+     profile : "Images/Aryan.jpg"
+  },
+    {
+     profile : "Images/Aryan.jpg"
+  },
+    {
+     profile : "Images/Aryan.jpg"
+  },
+]
+
+
   return (
     <div className={styles.container}>
       <Container>
     <Grid 
-    height="100vh"
      display="flex"
       justifyContent="center"
        alignItems="center"
        >
-        <FeedPostFooter 
-          reactionCount={10}
-          currentReactionId = {3}
-          onSaveClicked={()=>{
-            console.log("post saved")
-          }}
-          onCommentsClicked={()=>{
-            console.log("comment")
-          }}
+          <EventDetails
+        
+          event={event}
 
-        />
+          users = {users}
+          />
     </Grid>
     </Container>
     </div>
