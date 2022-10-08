@@ -4,8 +4,7 @@ import { Button, Card, TextField, Typography } from "@mui/material";
 
 //CSS(Style Sheets)
 import useLoginStyle from "./useStyle";
-import { postApi } from "apis/callApi";
-import { LOGIN, PROFILE } from "apis/apiActions";
+import Api from "services";
 
 interface ILogin {
   onLoginComplete: () => void;
@@ -35,23 +34,18 @@ const Login: FC<ILogin> = ({
 
   const submitHandler = () => {
     setLoading(true);
-    // TODO Handle Login api here
-    postApi(
-      LOGIN,
-      {
-        username: user,
-        password: password,
-      },
-      (data) => {
+
+    Api.users
+      .login({ username: user, password: password })
+      .then((data) => {
         setLoading(false);
         localStorage.setItem("token", data.access_token);
         onLoginComplete();
-      },
-      (error) => {
+      })
+      .catch((error) => {
         setLoading(false);
-        setError(error);
-      }
-    );
+        setError(error.message);
+      });
   };
 
   const registerHandler = () => {
