@@ -13,7 +13,7 @@ import ReactionButton from "components/molecules/ReactionButton/ReactionButton";
 import Like from "components/molecules/ReactionButton/Like";
 import UnLike from "components/molecules/ReactionButton/UnLike";
 import Idea from "components/molecules/ReactionButton/Idea";
-
+import EventCommentSend from "components/molecules/EventCommentSend/EventCommentSend";
 
 
 //Icons
@@ -25,6 +25,7 @@ import styles from "../styles/Home.module.css";
 import { Container } from "@mui/system";
 import { Grid } from "@mui/material";
 
+
 const Home: NextPage = () => {
   return (
     <div className={styles.container}>
@@ -35,16 +36,13 @@ const Home: NextPage = () => {
       justifyContent="center"
        alignItems="center"
        >
-        <FeedPostFooter 
-          reactionCount={10}
-          currentReactionId = {3}
-          onSaveClicked={()=>{
-            console.log("post saved")
-          }}
-          onCommentsClicked={()=>{
-            console.log("comment")
-          }}
+        <EventCommentSend
+        
+        onSubmitClicked = {(comment, rate)=> {
 
+          console.log(`Send Your Comment , Your Comment is ${comment} and rate is ${rate}` )
+
+        }}
         />
     </Grid>
     </Container>
