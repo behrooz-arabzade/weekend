@@ -13,7 +13,7 @@ import ReactionButton from "components/molecules/ReactionButton/ReactionButton";
 import Like from "components/molecules/ReactionButton/Like";
 import UnLike from "components/molecules/ReactionButton/UnLike";
 import Idea from "components/molecules/ReactionButton/Idea";
-
+import CreateEventOrPostHeader from "components/molecules/CreateEventOrPostHeader/CreateEventOrPostHeader";
 
 
 //Icons
@@ -25,6 +25,7 @@ import styles from "../styles/Home.module.css";
 import { Container } from "@mui/system";
 import { Grid } from "@mui/material";
 
+
 const Home: NextPage = () => {
   return (
     <div className={styles.container}>
@@ -35,17 +36,23 @@ const Home: NextPage = () => {
       justifyContent="center"
        alignItems="center"
        >
-        <FeedPostFooter 
-          reactionCount={10}
-          currentReactionId = {3}
-          onSaveClicked={()=>{
-            console.log("post saved")
-          }}
-          onCommentsClicked={()=>{
-            console.log("comment")
+          <CreateEventOrPostHeader
+
+          onPostClicked = {() => {
+            
+            alert("go to create Post Page")
+
           }}
 
-        />
+          onEventClicked = {() => {
+
+              alert("go to create event page")
+
+          }}
+
+          selected = "Post"
+          
+          />
     </Grid>
     </Container>
     </div>
