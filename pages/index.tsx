@@ -12,7 +12,7 @@ import ReactionButton from "components/molecules/ReactionButton/ReactionButton";
 import Like from "components/molecules/ReactionButton/Like";
 import UnLike from "components/molecules/ReactionButton/UnLike";
 import Idea from "components/molecules/ReactionButton/Idea";
-import EventDetails from "components/molecules/EventDetails/EventDetails";
+import EventCommentSend from "components/molecules/EventCommentSend/EventCommentSend";
 
 //Icons
 
@@ -21,6 +21,7 @@ import styles from "../styles/Home.module.css";
 import { Container } from "@mui/system";
 import { Grid } from "@mui/material";
 import UserProfileEditForm from "components/molecules/UserProfileEditForm/UserProfileEditForm";
+
 
 
 
@@ -72,12 +73,14 @@ const Home: NextPage = () => {
       justifyContent="center"
        alignItems="center"
        >
-          <EventDetails
+        <EventCommentSend
         
-          event={event}
+        onSubmitClicked = {(comment, rate)=> {
 
-          users = {users}
-          />
+          console.log(`Send Your Comment , Your Comment is ${comment} and rate is ${rate}` )
+
+        }}
+        />
     </Grid>
     </Container>
     </div>
