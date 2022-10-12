@@ -11,7 +11,7 @@ interface ICreate {
 
     onPostClicked: () => void;
     onEventClicked: () => void;
-    selected?: "Post" | "Event" | "None" | undefined;
+    // selected?: "Post" | "Event" | "None" | undefined;
 
 }
 
@@ -20,7 +20,7 @@ const CreateEventOrPostHeader: FC<ICreate> = ({
 
     onPostClicked,
     onEventClicked,
-    selected,
+    // selected,
 
 }) => {
 
@@ -31,7 +31,6 @@ const CreateEventOrPostHeader: FC<ICreate> = ({
     const createPostHandler = () => {
 
         onPostClicked();
-        console.log( selected)
 
     };
 
@@ -45,44 +44,44 @@ const CreateEventOrPostHeader: FC<ICreate> = ({
 
     return (
 
-            <div
-                className={cx(classes.root)}
+        <div
+            className={cx(classes.root)}
+        >
+            <Grid
+                display="flex"
+                p={1}
             >
-                <Grid
-                    display="flex"
-                    p={1}
+                <Button
+                    variant="contained"
+                    className={cx(classes.addPost)}
+                    onClick={createPostHandler}
+
                 >
-                    <Button
-                        variant="contained"
-                        className={cx(classes.addPost)}
-                        onClick={createPostHandler}
-                        
+                    <Typography
+                        component="p"
+                        variant="body2"
+                        fontWeight={700}
+                        color="black"
                     >
-                        <Typography
-                            component="p"
-                            variant="body2"
-                            fontWeight={700}
-                            color="black"
-                        >
-                            Add <span style={{color:"#fff"}}>Post</span>
-                        </Typography>
-                    </Button>
-                    <Button 
-                    variant="contained" 
-                    sx={{ background: "#fff" }} 
+                        Add <span style={{ color: "#fff" }}>Post</span>
+                    </Typography>
+                </Button>
+                <Button
+                    variant="contained"
+                    sx={{ background: "#fff" }}
                     onClick={createEventHandler}
+                >
+                    <Typography
+                        component="p"
+                        variant="body2"
+                        fontWeight={700}
+                        color="black"
                     >
-                        <Typography
-                            component="p"
-                            variant="body2"
-                            fontWeight={700}
-                            color="black"
-                        >
-                            Create <span className={cx(classes.baseColor)}>Event</span>
-                        </Typography>
-                    </Button>
-                </Grid>
-            </div>
+                        Create <span className={cx(classes.baseColor)}>Event</span>
+                    </Typography>
+                </Button>
+            </Grid>
+        </div>
 
     )
 }
