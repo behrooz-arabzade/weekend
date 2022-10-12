@@ -1,58 +1,65 @@
 import React, { FC } from "react";
-import {
-  Button,
-  Card,
-  Grid,
-  Typography,
-  Avatar,
-  CardMedia,
-} from "@mui/material";
+import { Button, Card, Grid, Typography, Avatar, CardMedia } from '@mui/material';
+
+
+
 
 //Icon
-import TitleIcon from "@mui/icons-material/Title";
-import CalendarTodayOutlinedIcon from "@mui/icons-material/CalendarTodayOutlined";
-import PersonOutlineOutlinedIcon from "@mui/icons-material/PersonOutlineOutlined";
-import AccessTimeOutlinedIcon from "@mui/icons-material/AccessTimeOutlined";
-import LocationOnOutlinedIcon from "@mui/icons-material/LocationOnOutlined";
-import PeopleAltOutlinedIcon from "@mui/icons-material/PeopleAltOutlined";
-import AppRegistrationOutlinedIcon from "@mui/icons-material/AppRegistrationOutlined";
-import MoreTimeOutlinedIcon from "@mui/icons-material/MoreTimeOutlined";
-import BusinessOutlinedIcon from "@mui/icons-material/BusinessOutlined";
-import DescriptionOutlinedIcon from "@mui/icons-material/DescriptionOutlined";
+import TitleIcon from '@mui/icons-material/Title';
+import CalendarTodayOutlinedIcon from '@mui/icons-material/CalendarTodayOutlined';
+import PersonOutlineOutlinedIcon from '@mui/icons-material/PersonOutlineOutlined';
+import AccessTimeOutlinedIcon from '@mui/icons-material/AccessTimeOutlined';
+import LocationOnOutlinedIcon from '@mui/icons-material/LocationOnOutlined';
+import PeopleAltOutlinedIcon from '@mui/icons-material/PeopleAltOutlined';
+import AppRegistrationOutlinedIcon from '@mui/icons-material/AppRegistrationOutlined';
+import MoreTimeOutlinedIcon from '@mui/icons-material/MoreTimeOutlined';
+import BusinessOutlinedIcon from '@mui/icons-material/BusinessOutlined';
+import DescriptionOutlinedIcon from '@mui/icons-material/DescriptionOutlined';
 
 //Css(Style Sheet)
 import useEventDetails from "./useStyle";
 
 //InterFace
-interface IEvent {
-  subject: string;
-  image: string;
-  TimeEvent: string;
-  time: string;
-  creator: string;
-  city: string;
-  maximumMember: string;
-  dateRegistration: string;
-  timeRegistration: string;
-  address: string;
-  description: string;
-}
 
 interface IEventDetails {
-  event: IEvent;
+  event: {
+    subject: string;
+    image: string;
+    TimeEvent: string;
+    time: string;
+    creator: string;
+    city: string;
+    maximumMember: string;
+    dateRegistration: string;
+    timeRegistration: string;
+    address: string;
+    description: string;
+  };
+
   users: Array<{
     profile: string;
-  }>;
+  }>
+
 }
 
-// TODO need refactoring
-const EventDetails: FC<IEventDetails> = ({ event, users }) => {
+
+const EventDetails: FC<IEventDetails> = ({
+  event,
+  users
+}) => {
+
   const { classes, cx } = useEventDetails();
 
   return (
     <div>
+
+
       <Card sx={{ width: "300px" }}>
-        <CardMedia component="img" height="140" image={event.image} />
+        <CardMedia
+          component="img"
+          height="140"
+          image={event.image}
+        />
         <Grid p={4}>
           <Grid>
             <Typography fontWeight="bold">
@@ -64,10 +71,9 @@ const EventDetails: FC<IEventDetails> = ({ event, users }) => {
           </Grid>
           <Grid mt={2}>
             <Typography fontWeight="bold">
-              <Grid display="flex">
+              <Grid display="flex" >
                 <CalendarTodayOutlinedIcon></CalendarTodayOutlinedIcon>
-                Date :{" "}
-                <span style={{ color: "orange" }}>{event.TimeEvent}</span>
+                Date :   <span style={{ color: "orange" }}>{event.TimeEvent}</span>
               </Grid>
             </Typography>
           </Grid>
@@ -97,7 +103,7 @@ const EventDetails: FC<IEventDetails> = ({ event, users }) => {
           </Grid>
           <Grid mt={2}>
             <Typography fontWeight="bold">
-              <Grid display="flex">
+              <Grid display="flex" >
                 <PeopleAltOutlinedIcon></PeopleAltOutlinedIcon>
                 MaximumMember : {event.maximumMember}
               </Grid>
@@ -138,11 +144,10 @@ const EventDetails: FC<IEventDetails> = ({ event, users }) => {
         </Grid>
         <Grid display="flex" justifyContent="center" m={2}>
           <Button variant="contained">
-            <Typography
-              fontWeight="bold"
-              onClick={() => {
-                alert("Enter");
-              }}
+            <Typography fontWeight="bold" onClick={() => {
+
+              alert("Enter")
+            }}
             >
               Participation
             </Typography>
@@ -151,27 +156,31 @@ const EventDetails: FC<IEventDetails> = ({ event, users }) => {
       </Card>
       <Grid mx={1} mt={2}>
         <Typography fontWeight="bold">
-          <Grid display="flex">
+          <Grid display="flex" >
             <PeopleAltOutlinedIcon></PeopleAltOutlinedIcon>
             Members
           </Grid>
         </Typography>
       </Grid>
       <Grid>
-        <Card className={cx(classes.member)} sx={{}}>
-          <Grid display="flex" sx={{ overflowX: "auto" }}>
-            {users.map((user, index) => {
-              return (
-                <Grid key={index} mx={2}>
-                  <Avatar src={user.profile} />
-                </Grid>
-              );
-            })}
+        <Card
+          className={cx(classes.member)}
+        >
+          <Grid display="flex" sx={{ overflowX: "auto" }} >
+            {
+              users.map((user, index) => {
+                return (
+                  <Grid key={index} mx={2}>
+                    <Avatar src={user.profile} />
+                  </Grid>
+                )
+              })
+            }
           </Grid>
         </Card>
       </Grid>
     </div>
-  );
-};
+  )
+}
 
 export default EventDetails;

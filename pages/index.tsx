@@ -12,7 +12,7 @@ import ReactionButton from "components/molecules/ReactionButton/ReactionButton";
 import Like from "components/molecules/ReactionButton/Like";
 import UnLike from "components/molecules/ReactionButton/UnLike";
 import Idea from "components/molecules/ReactionButton/Idea";
-import CreateEventOrPostHeader from "components/molecules/CreateEventOrPostHeader/CreateEventOrPostHeader";
+import EventMembers from "components/molecules/EventMembers/EventMembers";
 
 //Icons
 
@@ -20,6 +20,7 @@ import CreateEventOrPostHeader from "components/molecules/CreateEventOrPostHeade
 import styles from "../styles/Home.module.css";
 import { Container } from "@mui/system";
 import { Grid } from "@mui/material";
+
 
 const Home: NextPage = () => {
 
@@ -65,23 +66,32 @@ const Home: NextPage = () => {
     <div className={styles.container}>
       <Container>
         <Grid
+          height="100vh"
           display="flex"
           justifyContent="center"
           alignItems="center"
         >
-          <CreateEventOrPostHeader
+          <EventMembers
+            members={
+              [
+                {
+                  id: 1,
+                  userName: "@Aryan_Salemabadi",
+                  picSrc: "Images/Aryan.jpg",
+                },
+                {
+                  id: 2,
+                  userName: "@Behrooz_Arabzadeh",
+                  picSrc: "Images/Behrooz.png",
+                },
+                {
+                  id: 3,
+                  userName: "@SobhanGholami",
+                  picSrc: "Images/Sobhan.jpg",
+                },
 
-            onPostClicked={() => {
-
-              alert("go to create Post Page")
-
-            }}
-
-            onEventClicked={() => {
-
-              alert("go to create event page")
-
-            }}
+              ]
+            }
           />
         </Grid>
       </Container>
