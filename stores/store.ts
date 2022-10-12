@@ -11,6 +11,7 @@ import {
 } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 import templateSlice from "./slices/templateSlice/templateSlice";
+import uiSlice from './slices/uiSlice/uiSlice';
 
 const persistConfig = {
   key: "root",
@@ -21,6 +22,7 @@ const persistConfig = {
 // add all slices reducer in this reducer object
 const rootReducer = combineReducers({
   template: templateSlice,
+  // ui: uiSlice,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
@@ -37,3 +39,5 @@ export const store = configureStore({
 });
 
 export const persistor = persistStore(store);
+
+export type IRootState = ReturnType<typeof rootReducer>;

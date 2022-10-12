@@ -8,14 +8,14 @@ import useEventMembers from "./useStyle";
 
 //InterFace
 
+interface IMember {
+    id: number;
+    userName: string;
+    picSrc: string;
+}
+
 interface IEventMembers {
-
-    members: Array<{
-        id: number;
-        userName: string;
-        picSrc: string;
-    }>;
-
+    members: Array<IMember>;
 }
 
 
@@ -27,6 +27,10 @@ const EventMembers: FC<IEventMembers> = ({
 }) => {
 
     const { classes, cx } = useEventMembers();
+
+    const handleMemberClick = (member: IMember) => () => {
+
+    }
 
     return (
         <div>
@@ -45,10 +49,7 @@ const EventMembers: FC<IEventMembers> = ({
                                     >
                                         <Avatar
                                             src={member.picSrc}
-                                            onClick={() => {
-                                               alert(` go to page ${member.userName} `)
-                                            }}
-
+                                            onClick={handleMemberClick(member)}
                                         />
                                     </Grid>
                                 )

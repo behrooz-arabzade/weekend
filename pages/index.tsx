@@ -1,5 +1,4 @@
 import type { NextPage } from "next";
-
 // Components
 import MainNavigation from "components/molecules/MainNavigation/MainNavigation";
 import HomeIcon from "components/molecules/MainNavigation/HomeIcon";
@@ -15,10 +14,7 @@ import UnLike from "components/molecules/ReactionButton/UnLike";
 import Idea from "components/molecules/ReactionButton/Idea";
 import EventMembers from "components/molecules/EventMembers/EventMembers";
 
-
 //Icons
-import Head from "next/head";
-import Image from "next/image";
 
 //Css(Style Sheet)
 import styles from "../styles/Home.module.css";
@@ -27,6 +23,45 @@ import { Grid } from "@mui/material";
 
 
 const Home: NextPage = () => {
+
+  const event = {
+
+    subject: "pool",
+    image: "Images/pool.jpg",
+    TimeEvent: "2022/11/12 - 2022/11/15",
+    time: "19 - 21",
+    creator: "@Aryan_Salemabadi",
+    city: "Tehran",
+    maximumMember: "20",
+    dateRegistration: "2022/10/12 - 2022/10/15",
+    timeRegistration: " 00 - 23 ",
+    address: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua",
+    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua Egestas purus viverra accumsan in nisl nisi Arcu cursus vitae congue mauris rhoncus aenean vel elit scelerisque"
+
+  };
+
+  const users = [
+    {
+      profile: "Images/Aryan.jpg"
+    },
+    {
+      profile: "Images/Aryan.jpg"
+    },
+    {
+      profile: "Images/Aryan.jpg"
+    },
+    {
+      profile: "Images/Aryan.jpg"
+    },
+    {
+      profile: "Images/Aryan.jpg"
+    },
+    {
+      profile: "Images/Aryan.jpg"
+    },
+  ]
+
+
   return (
     <div className={styles.container}>
       <Container>
@@ -40,19 +75,19 @@ const Home: NextPage = () => {
             members={
               [
                 {
-                  id:1,
-                  userName:"@Aryan_Salemabadi",
-                  picSrc : "Images/Aryan.jpg",
+                  id: 1,
+                  userName: "@Aryan_Salemabadi",
+                  picSrc: "Images/Aryan.jpg",
                 },
                 {
-                  id:2,
-                  userName:"@Behrooz_Arabzadeh",
-                  picSrc : "Images/Behrooz.png",
+                  id: 2,
+                  userName: "@Behrooz_Arabzadeh",
+                  picSrc: "Images/Behrooz.png",
                 },
                 {
-                  id:3,
-                  userName:"@SobhanGholami",
-                  picSrc : "Images/Sobhan.jpg",
+                  id: 3,
+                  userName: "@SobhanGholami",
+                  picSrc: "Images/Sobhan.jpg",
                 },
 
               ]
@@ -63,4 +98,5 @@ const Home: NextPage = () => {
     </div>
   );
 };
+
 export default Home;
