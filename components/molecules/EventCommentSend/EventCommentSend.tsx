@@ -1,33 +1,23 @@
 import React, { useState, FC } from 'react';
 import { Grid, Typography, TextField, Button, Rating } from "@mui/material";
 
-
-
 //InterFace
 
 interface IEventCommentSend {
-
-    onSubmitClicked: (rate:number, comment:string) => void;
-
+    onSubmitClicked: (rate: number, comment: string) => void;
 }
 
 
-const EventCommentSend:FC<IEventCommentSend> = ({
-
+const EventCommentSend: FC<IEventCommentSend> = ({
     onSubmitClicked
-
 }) => {
-
     const [text, setText] = useState<string>("");
 
     const [value, setValue] = useState<number>(0);
 
     const submitClick = () => {
-
         onSubmitClicked(value, text)
-
     }
-
 
     return (
         <div>
@@ -47,7 +37,7 @@ const EventCommentSend:FC<IEventCommentSend> = ({
                         name="simple-controlled"
                         value={value}
                         onChange={(event, newValue) => {
-                            setValue(newValue);
+                            setValue(newValue!);
                         }}
                     />
                 </Grid>
@@ -62,9 +52,7 @@ const EventCommentSend:FC<IEventCommentSend> = ({
                     multiline
                     minRows={4}
                 />
-
             </Grid>
-
             <Grid
                 display="flex"
                 justifyContent="center"
@@ -77,10 +65,7 @@ const EventCommentSend:FC<IEventCommentSend> = ({
                         Send
                     </Typography>
                 </Button>
-
             </Grid>
-
-
         </div>
     )
 }
